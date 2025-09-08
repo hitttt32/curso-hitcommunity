@@ -10,37 +10,44 @@
     body{background:#0f0f0f;color:#f0f0f0;line-height:1.6;}
     a{color:#1abc9c;text-decoration:none;}
     a:hover{text-decoration:underline;}
-
     header{background:#111;padding:2rem 1rem;text-align:center;border-bottom:2px solid #1abc9c;}
     header h1{font-size:2.5rem;color:#1abc9c;margin-bottom:0.5rem;}
     header p{font-size:1.2rem;color:#ccc;}
     nav{display:flex;justify-content:center;gap:2rem;margin:1rem 0;}
     nav a{font-weight:700;}
-
     section{padding:3rem 1rem;max-width:1000px;margin:auto;}
     section h2{color:#1abc9c;margin-bottom:1rem;font-size:2rem;border-bottom:2px solid #1abc9c;display:inline-block;padding-bottom:0.3rem;}
     section p, section li{margin-bottom:1rem;}
-
     ul{list-style:inside square;margin-bottom:1rem;}
-
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem;}
     .card{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;transition:transform 0.3s,box-shadow 0.3s;}
     .card:hover{transform:translateY(-5px);box-shadow:0 0 20px #1abc9c;}
     .card h3{margin-bottom:0.5rem;color:#1abc9c;}
     .card p{font-size:0.95rem;color:#ccc;}
-
     .btn{display:inline-block;padding:0.6rem 1.2rem;background:#1abc9c;color:#111;font-weight:700;border-radius:8px;transition:background 0.3s;margin-top:0.5rem;cursor:pointer;}
     .btn:hover{background:#16a085;}
-
     footer{background:#111;padding:2rem 1rem;text-align:center;border-top:2px solid #1abc9c;margin-top:3rem;}
     footer p{font-size:0.9rem;color:#888;}
-
-    /* Quiz */
     .quiz{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;margin-bottom:2rem;}
     .quiz h3{color:#1abc9c;margin-bottom:1rem;}
     .quiz label{display:block;margin:0.5rem 0;cursor:pointer;}
     .quiz input[type="radio"]{margin-right:0.5rem;}
     .quiz .result{margin-top:0.5rem;font-weight:700;}
+    /* Responsividade vídeos/exercícios */
+    .video-container, .exercise-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+        margin-bottom: 1rem;
+    }
+    .video-container iframe, .exercise-container iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
 </style>
 </head>
 <body>
@@ -66,68 +73,97 @@
 <section id="aulas">
     <h2>Aulas e Conteúdo</h2>
     <div class="cards">
+        <!-- Capítulo 1 -->
         <div class="card">
             <h3>Capítulo 1: Fundamentos</h3>
             <p>História do Game Hacking, cheats internos e externos, comunidades de estudo e ética.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/R8JvC9zPL3s" allowfullscreen></iframe></div>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/abc123XYZ" allowfullscreen></iframe></div>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/def456XYZ" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 2 -->
         <div class="card">
             <h3>Capítulo 2: Programação e Memória</h3>
             <p>Ponteiros, structs, arrays, memória de processos, Read/Write Process Memory e API do Windows.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/u6b6Q1A8Zgk" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 3 -->
         <div class="card">
             <h3>Capítulo 3: Cheats Externos</h3>
             <p>Pointer chains, entity loops, leitura de memória sem injeção e overlays simples.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/video3EX" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 4 -->
         <div class="card">
             <h3>Capítulo 4: Cheats Internos</h3>
             <p>DLL Injection, Manual Mapping, Hooking, VMT, Inline Hook e criação de overlays com ImGui.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/video4EX" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 5 -->
         <div class="card">
             <h3>Capítulo 5: Engenharia Reversa</h3>
             <p>IDAs, Ghidra, x64dbg, pattern scanning e análise de binários.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/video5EX" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 6 -->
         <div class="card">
             <h3>Capítulo 6: Anti-Cheat</h3>
             <p>VAC, EAC, BattleEye, técnicas de detecção e usermode/kernelmode.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/video6EX" allowfullscreen></iframe></div>
         </div>
+        <!-- Capítulo 7 -->
         <div class="card">
             <h3>Capítulo 7: Aplicações Éticas</h3>
             <p>Trainers legais, mods, engenharia reversa para segurança digital.</p>
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/video7EX" allowfullscreen></iframe></div>
         </div>
     </div>
 </section>
 
 <section id="exercicios">
-    <h2>Exercícios Práticos</h2>
-    <ul>
-        <li>Explorar memória de processos com Cheat Engine.</li>
-        <li>Criar programa externo que mostra informações do jogador.</li>
-        <li>Desenvolver DLL que hooka funções do Windows.</li>
-        <li>Construir overlay com ImGui para entidades.</li>
-        <li>Praticar pattern scanning e localizar offsets dinâmicos.</li>
-    </ul>
+    <h2>Exercícios Interativos</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Exercício 1</h3>
+            <div class="exercise-container"><iframe src="https://replit.com/@SeuUsuario/Exercicio1?embed=true" frameborder="0"></iframe></div>
+        </div>
+        <div class="card">
+            <h3>Exercício 2</h3>
+            <div class="exercise-container"><iframe src="https://replit.com/@SeuUsuario/Exercicio2?embed=true" frameborder="0"></iframe></div>
+        </div>
+        <div class="card">
+            <h3>Exercício 3</h3>
+            <div class="exercise-container"><iframe src="https://replit.com/@SeuUsuario/Exercicio3?embed=true" frameborder="0"></iframe></div>
+        </div>
+        <!-- Continue adicionando até ter 20 exercícios -->
+    </div>
 </section>
 
 <section id="quiz">
-    <h2>Quiz Interativo</h2>
+    <h2>Quiz Interativo com Pontuação</h2>
 
     <div class="quiz">
         <h3>1. O que é um cheat interno?</h3>
-        <label><input type="radio" name="q1" value="0"> Um programa externo que lê memória do jogo sem injetar código.</label>
-        <label><input type="radio" name="q1" value="1"> Um código injetado no processo do jogo (DLL) para alterar seu comportamento.</label>
-        <label><input type="radio" name="q1" value="0"> Apenas um overlay gráfico sem interagir com o jogo.</label>
-        <div class="result" id="result1"></div>
+        <label><input type="radio" name="q1" value="0"> Programa externo que lê memória</label>
+        <label><input type="radio" name="q1" value="1"> Código injetado no processo (DLL)</label>
+        <label><input type="radio" name="q1" value="0"> Apenas overlay gráfico</label>
     </div>
 
     <div class="quiz">
-        <h3>2. Qual ferramenta é usada para engenharia reversa e análise de binários?</h3>
+        <h3>2. Ferramenta de engenharia reversa?</h3>
         <label><input type="radio" name="q2" value="0"> Cheat Engine</label>
         <label><input type="radio" name="q2" value="1"> IDA, Ghidra ou x64dbg</label>
         <label><input type="radio" name="q2" value="0"> Steam Client</label>
-        <div class="result" id="result2"></div>
     </div>
 
-    <button class="btn" onclick="checkQuiz()">Verificar Respostas</button>
+    <div class="quiz">
+        <h3>3. O que é Pattern Scan?</h3>
+        <label><input type="radio" name="q3" value="1"> Técnica para localizar códigos e offsets dinâmicos</label>
+        <label><input type="radio" name="q3" value="0"> Método de otimização de CPU</label>
+    </div>
+
+    <button class="btn" onclick="checkQuiz()">Verificar Pontuação</button>
+    <p id="pontuacao"></p>
 </section>
 
 <section id="recursos">
@@ -151,11 +187,15 @@
 
 <script>
 function checkQuiz(){
-    const q1 = document.querySelector('input[name="q1"]:checked');
-    const q2 = document.querySelector('input[name="q2"]:checked');
+    let score = 0;
+    const respostas = {"q1":"1","q2":"1","q3":"1"};
+    const total = Object.keys(respostas).length;
 
-    document.getElementById('result1').textContent = q1 ? (q1.value === "1" ? "✅ Correto!" : "❌ Errado!") : "⚠ Selecione uma resposta.";
-    document.getElementById('result2').textContent = q2 ? (q2.value === "1" ? "✅ Correto!" : "❌ Errado!") : "⚠ Selecione uma resposta.";
+    for(const q in respostas){
+        const sel = document.querySelector('input[name="'+q+'"]:checked');
+        if(sel && sel.value === respostas[q]) score++;
+    }
+    document.getElementById("pontuacao").textContent = `Sua pontuação: ${score} / ${total}`;
 }
 </script>
 
