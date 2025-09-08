@@ -62,10 +62,19 @@
 <section id="aulas">
     <h2>Aulas e Conteúdo</h2>
 
-    <div class="card">
-        <h3>Capítulo 1: Fundamentos</h3>
-        <p>História do Game Hacking, cheats internos e externos, comunidades de estudo e ética.</p>
-    </div>
+  <div class="card" style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #fff; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 12px;">Capítulo 1: Fundamentos</h3>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        O <strong>game hacking</strong> surgiu junto com os primeiros jogos eletrônicos, quando jogadores começaram a explorar falhas e manipular códigos para obter vantagens. Com o tempo, essa prática evoluiu, dando origem aos <strong>cheats internos</strong>, que operam dentro do processo do jogo, e aos <strong>cheats externos</strong>, que interagem com o jogo de fora, muitas vezes sem modificar diretamente sua memória.
+    </p>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        Além do aspecto técnico, o <strong>game hacking</strong> também gerou <strong>comunidades de estudo</strong>, como fóruns e grupos especializados, onde entusiastas compartilham conhecimentos sobre programação, engenharia reversa e segurança digital. Um exemplo atual é a <strong>HitCommunity</strong>, que combina aprendizado técnico com discussões sobre ética e boas práticas.
+    </p>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        Estudar game hacking vai além de trapacear: permite compreender profundamente o funcionamento dos jogos, desenvolver habilidades em programação avançada e criar sistemas mais seguros, reforçando a importância de <strong>ética</strong> e responsabilidade no uso dessas técnicas.
+    </p>
+</div>
+
 
     <div class="card">
         <h3>Capítulo 2: Programação e Memória</h3>
@@ -79,15 +88,15 @@
         <h3>Capítulo 3: Cheats Externos</h3>
         <p>Pointer chains, entity loops, leitura de memória sem injeção e overlays simples.</p>
         <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/iCKFMAYm1To" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/aY8MNCNN-cY" allowfullscreen></iframe>
         </div>
     </div>
 
     <div class="card">
-        <h3>Capítulo 4: Cheats Internos</h3>
-        <p>DLL Injection, Manual Mapping, Hooking, VMT, Inline Hook e criação de overlays com ImGui.</p>
+        <h3>Capítulo 4: Cheats Internos — Manipulação Avançada com Cheat Engine</h3>
+        <p>DLL Injectio Manual Mapping Hooking VMT (Virtual Method Table) Hooking Inline Hooking Criação de Overlays com ImGui</p>
         <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/fakeVideoID1" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/onfZ9xPWSvo" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -95,23 +104,63 @@
         <h3>Capítulo 5: Engenharia Reversa</h3>
         <p>IDAs, Ghidra, x64dbg, pattern scanning e análise de binários.</p>
         <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/fakeVideoID2" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/0_Eif2qGK7I" allowfullscreen></iframe>
         </div>
     </div>
 
     <div class="card">
         <h3>Capítulo 6: Anti-Cheat</h3>
-        <p>VAC, EAC, BattleEye, técnicas de detecção e usermode/kernelmode.</p>
+        <p>🔐 O que são VAC, EAC e BattlEye?
+
+VAC (Valve Anti-Cheat): Sistema proprietário da Valve integrado ao Steam, focado em detectar cheats internos (injetados diretamente no processo do jogo). Sua detecção é realizada após o jogo ser fechado, com banimentos aplicados posteriormente. 
+Wikipedia
+
+Easy Anti-Cheat (EAC): Desenvolvido pela Epic Games, é utilizado em jogos como Fortnite e Apex Legends. Opera tanto em user-mode quanto em kernel-mode, oferecendo uma abordagem mais abrangente na detecção de cheats.
+
+BattlEye: Conhecido por sua abordagem agressiva, utiliza monitoramento em tempo real e técnicas avançadas para detectar cheats, incluindo a análise de conexões TCP para identificar sites de cheats conhecidos. 
+arXiv
+
+🧠 User-Mode vs Kernel-Mode
+
+User-Mode: Opera no espaço do usuário, monitorando processos e interações do jogo. É mais suscetível a ser contornado por cheats que operam em kernel-mode.
+
+Kernel-Mode: Opera com privilégios elevados, permitindo acesso direto ao hardware e memória do sistema. Isso torna a detecção mais robusta, mas também mais complexa.
+
+🛠️ Técnicas de Detecção
+
+Assinaturas de Cheats: Identificação de padrões específicos de código associados a cheats conhecidos.
+
+Monitoramento de APIs: Análise do uso de APIs do sistema para detectar comportamentos anômalos.
+
+Análise de Comportamento: Observação de padrões de jogo para identificar ações que indicam o uso de cheats.
+
+🔄 Estratégias de Bypass
+
+Modificação de Drivers: Alteração de drivers do sistema para ocultar a presença de cheats.
+
+Uso de Rootkits: Implantação de rootkits para ocultar processos e arquivos relacionados a cheats.
+
+Falsificação de Assinaturas: Alteração de assinaturas digitais para enganar sistemas de detecção.</p>
         <div class="video-container">
-            <iframe src="https://www.youtube-nocookie.com/embed/fakeVideoID3" allowfullscreen></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/rOMhIsa8Xds" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="card">
-        <h3>Capítulo 7: Aplicações Éticas</h3>
-        <p>Trainers legais, mods, engenharia reversa para segurança digital.</p>
+<section>
+    <div class="card" style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #fff; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+        <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 12px;">Capítulo 7: Aplicações Éticas</h3>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Nem todo uso de técnicas de game hacking envolve trapaças ou atividades ilícitas. As habilidades desenvolvidas nesse campo podem ser aplicadas de forma ética e profissional em diversas áreas. Entre os exemplos mais comuns estão os <strong>trainers legais</strong>, que permitem ajustes e melhorias em jogos single-player sem prejudicar outros jogadores, e os <strong>mods</strong>, que transformam e ampliam experiências de jogo de maneira criativa e autorizada pelos desenvolvedores.
+        </p>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Outra aplicação importante é a <strong>engenharia reversa para segurança digital</strong>. Profissionais utilizam técnicas similares às empregadas por hackers para analisar softwares, identificar vulnerabilidades e criar sistemas mais seguros, contribuindo para um ecossistema digital mais confiável.
+        </p>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Em resumo, a expertise em game hacking, quando aplicada de forma ética, pode gerar <strong>inovação, aprendizado técnico e melhorias significativas em segurança digital</strong>, mostrando que essas habilidades vão muito além do simples ato de trapacear em jogos.
+        </p>
     </div>
 </section>
+
 
 <style>
     /* Vídeos responsivos */
@@ -169,7 +218,7 @@
      
         <div class="card">
             <h3>Exercício 3</h3>
-            <p>No Ida / cheat engine, qual ferramenta permite encontrar offsets dinâmicos?</p>
+            <p>cheat engine, qual ferramenta permite encontrar offsets dinâmicos?</p>
             <input type="text" id="ex3" placeholder="Digite sua resposta">
             <button class="btn" onclick="verificarEx3()">Verificar</button>
             <p id="res3"></p>
@@ -247,3 +296,4 @@ function checkQuiz(){
 
 </body>
 </html>
+
