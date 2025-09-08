@@ -13,9 +13,9 @@
     header{background:#111;padding:2rem 1rem;text-align:center;border-bottom:2px solid #1abc9c;}
     header h1{font-size:2.5rem;color:#1abc9c;margin-bottom:0.5rem;}
     header p{font-size:1.2rem;color:#ccc;}
-    nav{display:flex;justify-content:center;gap:2rem;margin:1rem 0;flex-wrap:wrap;}
+    nav{display:flex;justify-content:center;gap:2rem;margin:1rem 0;}
     nav a{font-weight:700;}
-    section{padding:3rem 1rem;max-width:1200px;margin:auto;}
+    section{padding:3rem 1rem;max-width:1000px;margin:auto;}
     section h2{color:#1abc9c;margin-bottom:1rem;font-size:2rem;border-bottom:2px solid #1abc9c;display:inline-block;padding-bottom:0.3rem;}
     section p, section li{margin-bottom:1rem;}
     ul{list-style:inside square;margin-bottom:1rem;}
@@ -28,13 +28,15 @@
     .btn:hover{background:#16a085;}
     footer{background:#111;padding:2rem 1rem;text-align:center;border-top:2px solid #1abc9c;margin-top:3rem;}
     footer p{font-size:0.9rem;color:#888;}
-    .quiz,.exercise{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;margin-bottom:2rem;}
-    .quiz h3,.exercise h3{color:#1abc9c;margin-bottom:1rem;}
-    .quiz label,.exercise label{display:block;margin:0.5rem 0;cursor:pointer;}
-    .quiz input[type="radio"],.exercise input[type="radio"]{margin-right:0.5rem;}
-    .quiz .result,.exercise .result{margin-top:0.5rem;font-weight:700;}
-    .videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem;}
-    iframe{width:100%;height:200px;border:0;border-radius:12px;}
+    /* Quiz */
+    .quiz{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;margin-bottom:2rem;}
+    .quiz h3{color:#1abc9c;margin-bottom:1rem;}
+    .quiz label{display:block;margin:0.5rem 0;cursor:pointer;}
+    .quiz input[type="radio"]{margin-right:0.5rem;}
+    .quiz .result{margin-top:0.5rem;font-weight:700;}
+    /* Video e exercícios responsivos */
+    .video-container, .exercise-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;}
+    .video-container iframe, .exercise-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
 </style>
 </head>
 <body>
@@ -45,7 +47,6 @@
     <nav>
         <a href="#sobre">Sobre</a>
         <a href="#aulas">Aulas</a>
-        <a href="#videos">Vídeos</a>
         <a href="#exercicios">Exercícios</a>
         <a href="#quiz">Quiz</a>
         <a href="#recursos">Recursos</a>
@@ -61,62 +62,48 @@
 <section id="aulas">
     <h2>Aulas e Conteúdo</h2>
     <div class="cards">
-        <div class="card"><h3>Capítulo 1: Fundamentos</h3><p>História do Game Hacking, cheats internos e externos, comunidades de estudo e ética.</p></div>
-        <div class="card"><h3>Capítulo 2: Programação e Memória</h3><p>Ponteiros, structs, arrays, memória de processos, Read/Write Process Memory e API do Windows.</p></div>
-        <div class="card"><h3>Capítulo 3: Cheats Externos</h3><p>Pointer chains, entity loops, leitura de memória sem injeção e overlays simples.</p></div>
-        <div class="card"><h3>Capítulo 4: Cheats Internos</h3><p>DLL Injection, Manual Mapping, Hooking, VMT, Inline Hook e criação de overlays com ImGui.</p></div>
-        <div class="card"><h3>Capítulo 5: Engenharia Reversa</h3><p>IDAs, Ghidra, x64dbg, pattern scanning e análise de binários.</p></div>
-        <div class="card"><h3>Capítulo 6: Anti-Cheat</h3><p>VAC, EAC, BattleEye, técnicas de detecção e usermode/kernelmode.</p></div>
-        <div class="card"><h3>Capítulo 7: Aplicações Éticas</h3><p>Trainers legais, mods, engenharia reversa para segurança digital.</p></div>
-    </div>
-</section>
-
-<section id="videos">
-    <h2>Vídeos do YouTube</h2>
-    <div class="videos">
-        <iframe src="https://www.youtube.com/embed/o7gzt8V8K6s" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/BH7aWmDnl7A" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/6rI3o9V_a7Q" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/abcd1234efg" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/hijk5678lmn" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/opqr9012stu" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/vwxy3456zab" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/cdef7890ghi" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/jklm1234nop" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/qrst5678uvw" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/yzab9012cde" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/fghi3456jkl" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/mnop7890qrs" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/tuvw1234xyz" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/abcd5678efg" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/hijk9012lmn" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/opqr3456stu" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/vwxy7890zab" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/cdef1234ghi" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/jklm5678nop" allowfullscreen></iframe>
+        <div class="card">
+            <h3>Capítulo 1: Fundamentos</h3>
+            <p>História do Game Hacking, cheats internos e externos, comunidades de estudo e ética.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/ID_DO_VIDEO_1" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Capítulo 2: Programação e Memória</h3>
+            <p>Ponteiros, structs, arrays, memória de processos, Read/Write Process Memory e API do Windows.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/ID_DO_VIDEO_2" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Capítulo 3: Cheats Externos</h3>
+            <p>Pointer chains, entity loops, leitura de memória sem injeção e overlays simples.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube-nocookie.com/embed/ID_DO_VIDEO_3" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Continue os capítulos como quiser -->
     </div>
 </section>
 
 <section id="exercicios">
     <h2>Exercícios Interativos</h2>
-    <div class="exercise">
-        <h3>1. Qual comando lê memória de outro processo em C#?</h3>
-        <label><input type="radio" name="ex1" value="0"> WriteProcessMemory</label>
-        <label><input type="radio" name="ex1" value="1"> ReadProcessMemory</label>
-        <label><input type="radio" name="ex1" value="0"> GetProcessById</label>
-        <div class="result" id="resEx1"></div>
+    <div class="cards">
+        <div class="card">
+            <h3>Exercício 1</h3>
+            <div class="exercise-container">
+                <iframe src="https://replit.com/@SeuUsuario/Exercicio1?embed=true"></iframe>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Exercício 2</h3>
+            <div class="exercise-container">
+                <iframe src="https://replit.com/@SeuUsuario/Exercicio2?embed=true"></iframe>
+            </div>
+        </div>
+        <!-- Adicione quantos exercícios quiser -->
     </div>
-
-    <div class="exercise">
-        <h3>2. Qual ferramenta é usada para depuração de binários?</h3>
-        <label><input type="radio" name="ex2" value="1"> x64dbg</label>
-        <label><input type="radio" name="ex2" value="0"> Visual Studio Code</label>
-        <label><input type="radio" name="ex2" value="0"> Steam</label>
-        <div class="result" id="resEx2"></div>
-    </div>
-
-    <button class="btn" onclick="checkExercises()">Verificar Exercícios</button>
-    <p id="pontuacao"></p>
 </section>
 
 <section id="quiz">
@@ -158,24 +145,6 @@
 </footer>
 
 <script>
-function checkExercises(){
-    let pontos = 0;
-    const ex1 = document.querySelector('input[name="ex1"]:checked');
-    const ex2 = document.querySelector('input[name="ex2"]:checked');
-
-    if(ex1){
-        document.getElementById('resEx1').textContent = ex1.value === '1' ? '✅ Correto!' : '❌ Errado!';
-        if(ex1.value==='1') pontos++;
-    } else {document.getElementById('resEx1').textContent='⚠ Selecione uma resposta.';}
-
-    if(ex2){
-        document.getElementById('resEx2').textContent = ex2.value === '1' ? '✅ Correto!' : '❌ Errado!';
-        if(ex2.value==='1') pontos++;
-    } else {document.getElementById('resEx2').textContent='⚠ Selecione uma resposta.';}
-
-    document.getElementById('pontuacao').textContent = `Pontuação: ${pontos}/2`;
-}
-
 function checkQuiz(){
     const q1 = document.querySelector('input[name="q1"]:checked');
     const q2 = document.querySelector('input[name="q2"]:checked');
