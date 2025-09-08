@@ -90,21 +90,59 @@
 <section id="exercicios">
     <h2>Exercícios Interativos</h2>
     <div class="cards">
+
         <div class="card">
             <h3>Exercício 1</h3>
-            <div class="exercise-container">
-                <iframe src="https://replit.com/@SeuUsuario/Exercicio1?embed=true"></iframe>
-            </div>
+            <p>Qual função da API do Windows é usada para ler memória de outro processo?</p>
+            <input type="text" id="ex1" placeholder="Digite sua resposta">
+            <button class="btn" onclick="verificarEx1()">Verificar</button>
+            <p id="res1"></p>
+            <small>Dica: Veja mais em <a href="https://www.unknowncheats.me/forum/cheat-engine/" target="_blank">UnKnoWnCheaTs Cheat Engine</a></small>
         </div>
+
         <div class="card">
             <h3>Exercício 2</h3>
-            <div class="exercise-container">
-                <iframe src="https://replit.com/@SeuUsuario/Exercicio2?embed=true"></iframe>
-            </div>
+            <p>Qual tipo de cheat é injetado diretamente no processo do jogo?</p>
+            <select id="ex2">
+                <option value="">Selecione...</option>
+                <option value="externo">Cheat Externo</option>
+                <option value="interno">Cheat Interno</option>
+                <option value="overlay">Overlay</option>
+            </select>
+            <button class="btn" onclick="verificarEx2()">Verificar</button>
+            <p id="res2"></p>
+            <small>Saiba mais em <a href="https://www.unknowncheats.me/forum/engine-hacking/" target="_blank">UnKnoWnCheaTs Engine Hacking</a></small>
         </div>
-        <!-- Adicione quantos exercícios quiser -->
+
+        <div class="card">
+            <h3>Exercício 3</h3>
+            <p>Em Cheat Engine, qual ferramenta permite encontrar offsets dinâmicos?</p>
+            <input type="text" id="ex3" placeholder="Digite sua resposta">
+            <button class="btn" onclick="verificarEx3()">Verificar</button>
+            <p id="res3"></p>
+            <small>Referência: <a href="https://www.unknowncheats.me/forum/cheat-engine/" target="_blank">UnKnoWnCheaTs</a></small>
+        </div>
+
     </div>
 </section>
+
+<script>
+function verificarEx1(){
+    const resposta = document.getElementById("ex1").value.toLowerCase();
+    document.getElementById("res1").textContent = (resposta.includes("readprocessmemory") ? "✅ Correto!" : "❌ Errado!");
+}
+
+function verificarEx2(){
+    const resposta = document.getElementById("ex2").value;
+    document.getElementById("res2").textContent = (resposta === "interno" ? "✅ Correto!" : "❌ Errado!");
+}
+
+function verificarEx3(){
+    const resposta = document.getElementById("ex3").value.toLowerCase();
+    document.getElementById("res3").textContent = (resposta.includes("pointer scan") ? "✅ Correto!" : "❌ Errado!");
+}
+</script>
+
 
 <section id="quiz">
     <h2>Quiz Interativo</h2>
