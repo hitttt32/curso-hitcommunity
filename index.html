@@ -1,238 +1,298 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HIT NEXUS | The Library of Alexandria V14</title>
-
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso HitCommunity - Game Hacking & Engenharia Reversa</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --primary:#00ff88;
-  --bg:#050508;
-  --panel:#0d0f14;
-  --card:#12141c;
-  --border:#1f2230;
-  --text:#e5e7eb;
-  --muted:#8b93a7;
-  --code:#020204;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:radial-gradient(1200px 600px at 20% -10%,#0b1224,#050508 60%);
-  color:var(--text);
-  display:flex;
-}
-
-/* ===== SIDEBAR ===== */
-.sidebar{
-  width:320px;flex:0 0 320px;
-  background:linear-gradient(180deg,#0d0f14,#08090d);
-  border-right:1px solid var(--border);
-  padding:28px 20px;
-  position:fixed;left:0;top:0;bottom:0;
-  overflow-y:auto;
-}
-.logo{
-  font-size:1.5rem;font-weight:800;color:var(--primary);
-  letter-spacing:-1px;margin-bottom:28px
-}
-.nav-cat{
-  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);margin:22px 0 10px;display:block
-}
-.nav-item{
-  display:flex;align-items:center;gap:10px;
-  padding:12px 14px;border-radius:12px;
-  font-size:.85rem;color:#a1a9c4;cursor:pointer;transition:.25s
-}
-.nav-item:hover{background:rgba(255,255,255,.04);color:var(--primary)}
-.nav-item.active{
-  background:rgba(0,255,136,.12);color:var(--primary);font-weight:700;
-  box-shadow:inset 0 0 0 1px rgba(0,255,136,.25)
-}
-
-/* ===== MAIN ===== */
-.main{margin-left:320px;padding:56px 64px;width:100%}
-.section{display:none;animation:fadeUp .35s ease}
-.section.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-
-h1{font-size:2.6rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:22px}
-h1 span{color:var(--primary)}
-
-.module{
-  background:linear-gradient(180deg,#12141c,#0e1016);
-  border:1px solid var(--border);
-  border-radius:22px;padding:36px;margin-bottom:28px
-}
-.badge{
-  display:inline-block;background:rgba(0,255,136,.12);color:var(--primary);
-  font-size:11px;font-weight:800;padding:5px 12px;border-radius:6px;margin-bottom:12px
-}
-
-/* ===== GRID / CARDS ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{
-  background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px
-}
-.card h4{margin-bottom:6px}
-.card p{color:var(--muted);font-size:.9rem;line-height:1.5}
-
-/* ===== VIDEO ===== */
-.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-bottom:28px}
-.video-card{background:#000;border-radius:18px;overflow:hidden;border:1px solid var(--border)}
-.video-ph{position:relative;padding-bottom:56.25%}
-.video-ph iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-title{padding:14px;border-top:1px solid var(--border);font-size:.9rem;font-weight:600}
-
-/* ===== TUTORIAL ===== */
-.tutorial-step{border-left:2px solid var(--primary);padding-left:16px;margin:18px 0}
-.tutorial-step h4{color:var(--primary);font-size:.75rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-pre{
-  background:var(--code);border:1px solid var(--border);border-radius:14px;
-  padding:18px;overflow:auto;color:#a5d6ff;font-family:'JetBrains Mono',monospace;font-size:.85rem
-}
-
-/* ===== TABLE ===== */
-table{width:100%;border-collapse:collapse}
-td{padding:14px;border-bottom:1px solid var(--border);color:var(--muted)}
-td.tag{color:var(--primary);width:120px}
-
-/* ===== FOOT ===== */
-.footer{margin-top:40px;color:var(--muted);font-size:.85rem}
-
-@media(max-width:1100px){.main{padding:40px}}
-@media(max-width:900px){.sidebar{position:static;width:100%;height:auto}.main{margin-left:0}}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+    body{background:#0f0f0f;color:#f0f0f0;line-height:1.6;}
+    a{color:#1abc9c;text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    header{background:#111;padding:2rem 1rem;text-align:center;border-bottom:2px solid #1abc9c;}
+    header h1{font-size:2.5rem;color:#1abc9c;margin-bottom:0.5rem;}
+    header p{font-size:1.2rem;color:#ccc;}
+    nav{display:flex;justify-content:center;gap:2rem;margin:1rem 0;}
+    nav a{font-weight:700;}
+    section{padding:3rem 1rem;max-width:1000px;margin:auto;}
+    section h2{color:#1abc9c;margin-bottom:1rem;font-size:2rem;border-bottom:2px solid #1abc9c;display:inline-block;padding-bottom:0.3rem;}
+    section p, section li{margin-bottom:1rem;}
+    ul{list-style:inside square;margin-bottom:1rem;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem;}
+    .card{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;transition:transform 0.3s,box-shadow 0.3s;}
+    .card:hover{transform:translateY(-5px);box-shadow:0 0 20px #1abc9c;}
+    .card h3{margin-bottom:0.5rem;color:#1abc9c;}
+    .card p{font-size:0.95rem;color:#ccc;}
+    .btn{display:inline-block;padding:0.6rem 1.2rem;background:#1abc9c;color:#111;font-weight:700;border-radius:8px;transition:background 0.3s;margin-top:0.5rem;cursor:pointer;}
+    .btn:hover{background:#16a085;}
+    footer{background:#111;padding:2rem 1rem;text-align:center;border-top:2px solid #1abc9c;margin-top:3rem;}
+    footer p{font-size:0.9rem;color:#888;}
+    /* Quiz */
+    .quiz{background:#1a1a1a;padding:1.5rem;border-radius:12px;border:1px solid #1abc9c;margin-bottom:2rem;}
+    .quiz h3{color:#1abc9c;margin-bottom:1rem;}
+    .quiz label{display:block;margin:0.5rem 0;cursor:pointer;}
+    .quiz input[type="radio"]{margin-right:0.5rem;}
+    .quiz .result{margin-top:0.5rem;font-weight:700;}
+    /* Video e exercícios responsivos */
+    .video-container, .exercise-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:1rem;}
+    .video-container iframe, .exercise-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
-  <div class="logo">HIT_NEXUS_v14</div>
+<header>
+    <h1>Curso HitCommunity</h1>
+    <p>Game Hacking & Engenharia Reversa - Teoria, Prática e Exercícios</p>
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#aulas">Aulas</a>
+        <a href="#exercicios">Exercícios</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#recursos">Recursos</a>
+    </nav>
+</header>
 
-  <span class="nav-cat">Academy</span>
-  <div class="nav-item active" onclick="nav(this,'home')">🏛️ Alexandria</div>
-  <div class="nav-item" onclick="nav(this,'onboarding')">🚪 Onboarding</div>
-  <div class="nav-item" onclick="nav(this,'foundations')">🧠 Foundations</div>
-  <div class="nav-item" onclick="nav(this,'systems')">⚙️ Systems Internals</div>
-  <div class="nav-item" onclick="nav(this,'reversing')">🧬 Reverse Engineering</div>
-  <div class="nav-item" onclick="nav(this,'engines')">🎮 Engine Analysis</div>
-  <div class="nav-item" onclick="nav(this,'defense')">🛡️ Defense & Observability</div>
-  <div class="nav-item" onclick="nav(this,'research')">🔬 Research</div>
-
-  <span class="nav-cat">Vault</span>
-  <div class="nav-item" onclick="nav(this,'vault')">📚 Master Archive</div>
-</aside>
-
-<main class="main">
-
-<section id="home" class="section active">
-  <h1>The Library of <span>Alexandria</span></h1>
-  <div class="module">
-    <p>Um hub educacional avançado focado em <b>sistemas</b>, <b>engenharia de software</b> e <b>análise técnica</b>. Aqui o objetivo é entendimento profundo, leitura crítica e progressão estruturada.</p>
-  </div>
-  <div class="grid">
-    <div class="card"><h4>Curso Estruturado</h4><p>Do zero ao nível de pesquisa, com progressão clara.</p></div>
-    <div class="card"><h4>Conteúdo Editorial</h4><p>Ensaios, estudos de caso e referências.</p></div>
-    <div class="card"><h4>Vault Curado</h4><p>Fontes clássicas, papers e documentação.</p></div>
-  </div>
+<section id="sobre">
+    <h2>Sobre o Curso</h2>
+    <p>Este curso fornece conhecimento detalhado e prático de Game Hacking e Engenharia Reversa, desde fundamentos de programação até técnicas avançadas de cheats internos e externos, incluindo DLL Injection, Hooking, Pattern Scan, Overlays e Anti-Cheats.</p>
+    <p>O curso inclui exercícios práticos, quizzes interativos e recursos de estudo atualizados de comunidades como UnKnoWnCheaTs e Guided Hacking.</p>
 </section>
 
-<section id="onboarding" class="section">
-  <h1>On<span>boarding</span></h1>
-  <div class="module">
-    <div class="badge">COMECE AQUI</div>
-    <p>Como usar a plataforma, como estudar sistemas complexos e por que ética, contexto legal e responsabilidade importam.</p>
-  </div>
-</section>
+<section id="aulas">
+    <h2>Aulas e Conteúdo</h2>
 
-<section id="foundations" class="section">
-  <h1>Foun<span>dations</span></h1>
-  <div class="module">
-    <h3>Arquitetura & SO</h3>
-    <ul style="margin-left:18px;color:var(--muted)">
-      <li>Arquitetura x86-64 (visão geral)</li>
-      <li>Processos, threads e escalonamento</li>
-      <li>Memória virtual e paginação</li>
-      <li>Introdução a debugging</li>
-    </ul>
-  </div>
-</section>
+  <div class="card" style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #fff; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+    <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 12px;">Capítulo 1: Fundamentos</h3>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        O <strong>game hacking</strong> surgiu junto com os primeiros jogos eletrônicos, quando jogadores começaram a explorar falhas e manipular códigos para obter vantagens. Com o tempo, essa prática evoluiu, dando origem aos <strong>cheats internos</strong>, que operam dentro do processo do jogo, e aos <strong>cheats externos</strong>, que interagem com o jogo de fora, muitas vezes sem modificar diretamente sua memória.
+    </p>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        Além do aspecto técnico, o <strong>game hacking</strong> também gerou <strong>comunidades de estudo</strong>, como fóruns e grupos especializados, onde entusiastas compartilham conhecimentos sobre programação, engenharia reversa e segurança digital. Um exemplo atual é a <strong>HitCommunity</strong>, que combina aprendizado técnico com discussões sobre ética e boas práticas.
+    </p>
+    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+        Estudar game hacking vai além de trapacear: permite compreender profundamente o funcionamento dos jogos, desenvolver habilidades em programação avançada e criar sistemas mais seguros, reforçando a importância de <strong>ética</strong> e responsabilidade no uso dessas técnicas.
+    </p>
+</div>
 
-<section id="systems" class="section">
-  <h1>Systems <span>Internals</span></h1>
-  <div class="module">
-    <h3>Windows Internals (Conceitual)</h3>
-    <p>Objetos, handles, IRQL, APC e impactos práticos no design de software.</p>
-    <div class="tutorial-step"><h4>Driver Lifecycle</h4><p>Carregamento, inicialização, operação e descarregamento.</p></div>
-  </div>
-</section>
 
-<section id="reversing" class="section">
-  <h1>Reverse <span>Engineering</span></h1>
-  <div class="video-grid">
-    <div class="video-card"><div class="video-ph"><iframe src="https://www.youtube.com/embed/Wn3_O8-Gv6U"></iframe></div><div class="video-title">Análise Estática — Conceitos</div></div>
-    <div class="video-card"><div class="video-ph"><iframe src="https://www.youtube.com/embed/K8_YF03A30U"></iframe></div><div class="video-title">Análise Dinâmica — Conceitos</div></div>
-  </div>
-  <div class="module">
-    <p>Fluxo de análise, leitura de assembly orientada a propósito e reconstrução lógica.</p>
-  </div>
-</section>
-
-<section id="engines" class="section">
-  <h1>Engine <span>Analysis</span></h1>
-  <div class="module">
-    <p>Engines como sistemas complexos: ciclo de frame, ECS, multithreading e performance.</p>
-    <pre>// Exemplo conceitual de hierarquia (pseudo)
-World -> Systems -> Entities -> Components</pre>
-  </div>
-</section>
-
-<section id="defense" class="section">
-  <h1>Defense & <span>Observability</span></h1>
-  <div class="module">
-    <p>Modelos de ameaça, detecção comportamental, integridade e trade-offs.</p>
-    <div class="grid">
-      <div class="card"><h4>Heurísticas</h4><p>Força vs. falsos positivos.</p></div>
-      <div class="card"><h4>Telemetria</h4><p>O que é observado e por quê.</p></div>
-      <div class="card"><h4>Limitações</h4><p>Nenhuma defesa é absoluta.</p></div>
+    <div class="card">
+        <h3>Capítulo 2: Programação e Memória</h3>
+        <p>Ponteiros, structs, arrays, memória de processos, Read/Write Process Memory e API do Windows.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/NgPKBRIFU5k" allowfullscreen></iframe>
+        </div>
     </div>
-  </div>
+
+    <div class="card">
+        <h3>Capítulo 3: Cheats Externos</h3>
+        <p>Pointer chains, entity loops, leitura de memória sem injeção e overlays simples.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/aY8MNCNN-cY" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Capítulo 4: Cheats Internos — Manipulação Avançada com Cheat Engine</h3>
+        <p>DLL Injectio Manual Mapping Hooking VMT (Virtual Method Table) Hooking Inline Hooking Criação de Overlays com ImGui</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/onfZ9xPWSvo" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Capítulo 5: Engenharia Reversa</h3>
+        <p>IDAs, Ghidra, x64dbg, pattern scanning e análise de binários.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/0_Eif2qGK7I" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Capítulo 6: Anti-Cheat</h3>
+        <p>🔐 O que são VAC, EAC e BattlEye?
+
+VAC (Valve Anti-Cheat): Sistema proprietário da Valve integrado ao Steam, focado em detectar cheats internos (injetados diretamente no processo do jogo). Sua detecção é realizada após o jogo ser fechado, com banimentos aplicados posteriormente. 
+Wikipedia
+
+Easy Anti-Cheat (EAC): Desenvolvido pela Epic Games, é utilizado em jogos como Fortnite e Apex Legends. Opera tanto em user-mode quanto em kernel-mode, oferecendo uma abordagem mais abrangente na detecção de cheats.
+
+BattlEye: Conhecido por sua abordagem agressiva, utiliza monitoramento em tempo real e técnicas avançadas para detectar cheats, incluindo a análise de conexões TCP para identificar sites de cheats conhecidos. 
+arXiv
+
+🧠 User-Mode vs Kernel-Mode
+
+User-Mode: Opera no espaço do usuário, monitorando processos e interações do jogo. É mais suscetível a ser contornado por cheats que operam em kernel-mode.
+
+Kernel-Mode: Opera com privilégios elevados, permitindo acesso direto ao hardware e memória do sistema. Isso torna a detecção mais robusta, mas também mais complexa.
+
+🛠️ Técnicas de Detecção
+
+Assinaturas de Cheats: Identificação de padrões específicos de código associados a cheats conhecidos.
+
+Monitoramento de APIs: Análise do uso de APIs do sistema para detectar comportamentos anômalos.
+
+Análise de Comportamento: Observação de padrões de jogo para identificar ações que indicam o uso de cheats.
+
+🔄 Estratégias de Bypass
+
+Modificação de Drivers: Alteração de drivers do sistema para ocultar a presença de cheats.
+
+Uso de Rootkits: Implantação de rootkits para ocultar processos e arquivos relacionados a cheats.
+
+Falsificação de Assinaturas: Alteração de assinaturas digitais para enganar sistemas de detecção.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/rOMhIsa8Xds" allowfullscreen></iframe>
+        </div>
+    </div>
+
+<section>
+    <div class="card" style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #fff; max-width: 600px; margin: 20px auto; font-family: Arial, sans-serif;">
+        <h3 style="font-size: 1.5rem; color: #333; margin-bottom: 12px;">Capítulo 7: Aplicações Éticas</h3>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Nem todo uso de técnicas de game hacking envolve trapaças ou atividades ilícitas. As habilidades desenvolvidas nesse campo podem ser aplicadas de forma ética e profissional em diversas áreas. Entre os exemplos mais comuns estão os <strong>trainers legais</strong>, que permitem ajustes e melhorias em jogos single-player sem prejudicar outros jogadores, e os <strong>mods</strong>, que transformam e ampliam experiências de jogo de maneira criativa e autorizada pelos desenvolvedores.
+        </p>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Outra aplicação importante é a <strong>engenharia reversa para segurança digital</strong>. Profissionais utilizam técnicas similares às empregadas por hackers para analisar softwares, identificar vulnerabilidades e criar sistemas mais seguros, contribuindo para um ecossistema digital mais confiável.
+        </p>
+        <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+            Em resumo, a expertise em game hacking, quando aplicada de forma ética, pode gerar <strong>inovação, aprendizado técnico e melhorias significativas em segurança digital</strong>, mostrando que essas habilidades vão muito além do simples ato de trapacear em jogos.
+        </p>
+    </div>
 </section>
 
-<section id="research" class="section">
-  <h1>Re<span>search</span></h1>
-  <div class="module">
-    <p>Leitura de papers, construção de hipóteses, laboratórios conceituais e escrita técnica.</p>
-  </div>
+
+<style>
+    /* Vídeos responsivos */
+    .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px; /* largura máxima do vídeo */
+        margin: 1rem auto; /* centraliza o vídeo */
+        padding-bottom: 56.25%; /* proporção 16:9 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
+
+        <!-- Continue os capítulos como quiser -->
+    </div>
 </section>
 
-<section id="vault" class="section">
-  <h1>Master <span>Archive</span></h1>
-  <div class="module">
-    <table>
-      <tr><td class="tag">[BOOK]</td><td>Operating Systems: Three Easy Pieces</td></tr>
-      <tr><td class="tag">[PAPER]</td><td>Modern Memory Management</td></tr>
-      <tr><td class="tag">[DOC]</td><td>Windows Internals Documentation</td></tr>
-    </table>
-  </div>
-</section>
+<section id="exercicios">
+    <h2>Exercícios Interativos</h2>
+    <div class="cards">
+  
+        <div class="card">
+            <h3>Exercício 1</h3>
+            <p>Qual função da API do Windows é usada para ler memória de outro processo?</p>    
+            <input type="text" id="ex1" placeholder="Digite sua resposta">
+            <button class="btn" onclick="verificarEx1()">Verificar</button>
+            <p id="res1"></p>
+            <small>Dica: Veja mais em <a href="https://www.unknowncheats.me/forum/cheat-engine/" target="_blank">UnKnoWnCheaTs Cheat Engine</a></small>
+        </div>
 
-<div class="footer">© HIT NEXUS — Conhecimento primeiro. Implementação consciente depois.</div>
-</main>
+        <div class="card">
+            <h3>Exercício 2</h3>
+            <p>Qual tipo de cheat é injetado diretamente no processo do jogo?</p>
+            <select id="ex2">
+                <option value="">Selecione...</option>
+                <option value="externo">Cheat Externo</option>
+                <option value="interno">Cheat Interno</option>
+                <option value="overlay">Overlay</option>
+            </select>
+            <button class="btn" onclick="verificarEx2()">Verificar</button>
+            <p id="res2"></p>
+            <small>Saiba mais em <a href="https://www.unknowncheats.me/forum/engine-hacking/" target="_blank">UnKnoWnCheaTs Engine Hacking</a></small>
+        </div>
+     
+        <div class="card">
+            <h3>Exercício 3</h3>
+            <p>cheat engine, qual ferramenta permite encontrar offsets dinâmicos?</p>
+            <input type="text" id="ex3" placeholder="Digite sua resposta">
+            <button class="btn" onclick="verificarEx3()">Verificar</button>
+            <p id="res3"></p>
+            <small>Referência: <a href="https://www.unknowncheats.me/forum/cheat-engine/" target="_blank">UnKnoWnCheaTs</a></small>
+        </div>
+
+    </div>
+</section>
 
 <script>
-function nav(btn,id){
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function verificarEx1(){
+    const resposta = document.getElementById("ex1").value.toLowerCase();
+    document.getElementById("res1").textContent = (resposta.includes("readprocessmemory") ? "✅ Correto!" : "❌ Errado!");
+}
+
+function verificarEx2(){
+    const resposta = document.getElementById("ex2").value;
+    document.getElementById("res2").textContent = (resposta === "interno" ? "✅ Correto!" : "❌ Errado!");
+}
+
+function verificarEx3(){
+    const resposta = document.getElementById("ex3").value.toLowerCase();
+    document.getElementById("res3").textContent = (resposta.includes("pointer scan") ? "✅ Correto!" : "❌ Errado!");
 }
 </script>
+
+
+<section id="quiz">
+    <h2>Quiz Interativo</h2>
+    <div class="quiz">
+        <h3>1. O que é um cheat interno?</h3>
+        <label><input type="radio" name="q1" value="0"> Um programa externo que lê memória do jogo sem injetar código.</label>
+        <label><input type="radio" name="q1" value="1"> Um código injetado no processo do jogo (DLL) para alterar seu comportamento.</label>
+        <label><input type="radio" name="q1" value="0"> Apenas um overlay gráfico sem interagir com o jogo.</label>
+        <div class="result" id="result1"></div>
+    </div>
+    <div class="quiz">
+        <h3>2. Qual ferramenta é usada para engenharia reversa e análise de binários?</h3>
+        <label><input type="radio" name="q2" value="0"> Cheat Engine</label>
+        <label><input type="radio" name="q2" value="1"> IDA, Ghidra ou x64dbg</label>
+        <label><input type="radio" name="q2" value="0"> Steam Client</label>
+        <div class="result" id="result2"></div>
+    </div>
+    <button class="btn" onclick="checkQuiz()">Verificar Respostas</button>
+</section>
+
+<section id="recursos">
+    <h2>Recursos de Estudo</h2>
+    <ul>
+        <li><a href="https://www.unknowncheats.me/forum/" target="_blank">UnKnoWnCheaTs</a></li>
+        <li><a href="https://wiki.cheatengine.org/" target="_blank">Cheat Engine Wiki</a></li>
+        <li><a href="https://guidedhacking.com/" target="_blank">Guided Hacking</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/windows/win32/api/" target="_blank">Microsoft Docs - WinAPI</a></li>
+    </ul>
+    <p>Livros recomendados:</p>
+    <ul>
+        <li><b>Reversing: Secrets of Reverse Engineering</b> – Eldad Eilam</li>
+        <li><b>Practical Reverse Engineering</b> – Dang, Gazet, Bachaalany</li>
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2025 HitCommunity. Curso Educacional e Ético de Game Hacking & Engenharia Reversa.</p>
+</footer>
+
+<script>
+function checkQuiz(){
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+
+    document.getElementById('result1').textContent = q1 ? (q1.value === "1" ? "✅ Correto!" : "❌ Errado!") : "⚠ Selecione uma resposta.";
+    document.getElementById('result2').textContent = q2 ? (q2.value === "1" ? "✅ Correto!" : "❌ Errado!") : "⚠ Selecione uma resposta.";
+}
+</script>
+
 </body>
 </html>
