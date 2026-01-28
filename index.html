@@ -2,167 +2,215 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>HIT NEXUS | THE SOVEREIGN V13</title>
+    <title>HIT NEXUS | THE LIBRARY OF ALEXANDRIA V14</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00ff88; --bg: #010103; --surface: #0a0a0c; --card: #111114;
             --border: #1f1f23; --text: #f8fafc; --dim: #64748b; --danger: #ff4655;
-            --eac: #3498db; --be: #f1c40f; --asm: #bf40bf;
+            --code-bg: #000000;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; scrollbar-width: thin; }
         body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; }
 
-        /* Sidebar Pro */
-        .sidebar { width: 320px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border); position: fixed; padding: 30px 20px; overflow-y: auto; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; }
-        .nav-cat { font-size: 0.6rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px; display: block; }
-        .nav-item { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 8px; color: #8892b0; text-decoration: none; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
+        /* Sidebar Customizada */
+        .sidebar { width: 340px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border); position: fixed; padding: 30px 20px; overflow-y: auto; z-index: 1000; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; letter-spacing: -1px; }
+        .nav-cat { font-size: 0.65rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px; display: block; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 10px; color: #8892b0; text-decoration: none; font-size: 0.85rem; cursor: pointer; transition: 0.2s; margin-bottom: 2px; }
         .nav-item:hover { background: rgba(255,255,255,0.03); color: var(--primary); }
         .nav-item.active { background: rgba(0, 255, 136, 0.1); color: var(--primary); font-weight: 700; border: 1px solid rgba(0, 255, 136, 0.2); }
 
-        /* Content */
-        .main { margin-left: 320px; width: 100%; padding: 50px 60px; }
-        .section { display: none; animation: fadeIn 0.4s ease; }
+        /* Content Area */
+        .main { margin-left: 340px; width: 100%; padding: 60px 80px; }
+        .section { display: none; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* UI Blocks */
-        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 25px; }
-        pre { background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--border); font-family: 'JetBrains Mono'; font-size: 0.8rem; color: #a5d6ff; overflow-x: auto; margin: 15px 0; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; background: #000; margin: 20px 0; border: 1px solid var(--border); }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* Content Blocks */
+        h1 { font-size: 2.8rem; margin-bottom: 15px; font-weight: 800; letter-spacing: -1.5px; }
+        h1 span { color: var(--primary); }
+        .module { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; margin-bottom: 30px; }
         
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem; }
-        th { text-align: left; padding: 12px; color: var(--dim); border-bottom: 2px solid var(--border); }
-        td { padding: 12px; border-bottom: 1px solid var(--border); }
+        /* Video System */
+        .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .video-card { background: #000; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+        .video-placeholder { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-placeholder iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+        .video-title { padding: 15px; font-size: 0.9rem; font-weight: 600; color: var(--text); border-top: 1px solid var(--border); }
+
+        /* Code & Tutorials */
+        .tutorial-step { margin-bottom: 30px; padding-left: 20px; border-left: 2px solid var(--primary); }
+        .tutorial-step h4 { color: var(--primary); margin-bottom: 10px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+        pre { background: var(--code-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7; color: #a5d6ff; overflow-x: auto; margin: 15px 0; }
+        
+        .badge { padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; background: rgba(0,255,136,0.1); color: var(--primary); margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <aside class="sidebar">
-    <div class="logo">HIT_NEXUS_V13</div>
+    <div class="logo">HIT_NEXUS_v14</div>
     
-    <span class="nav-cat">Video Tutorials</span>
-    <div class="nav-item active" onclick="nav(this, 'tutorials')">🎬 Masterclass Library</div>
+    <span class="nav-cat">Video Masterclasses</span>
+    <div class="nav-item active" onclick="nav(this, 'vid-kernel')">📹 Kernel & Drivers</div>
+    <div class="nav-item" onclick="nav(this, 'vid-reversing')">📹 Reverse Engineering</div>
 
-    <span class="nav-cat">Anti-Cheat Deep Dive</span>
-    <div class="nav-item" onclick="nav(this, 'eac-be')">🔵 EAC & BattlEye Docs</div>
-    <div class="nav-item" onclick="nav(this, 'spoofer')">🎭 Hardware Spoofing</div>
-
-    <span class="nav-cat">Engines & ASM</span>
-    <div class="nav-item" onclick="nav(this, 'engines')">🎮 Unreal & Unity SDK</div>
-    <div class="nav-item" onclick="nav(this, 'syscalls')">⚡ Direct Syscalls (ASM)</div>
-
-    <span class="nav-cat">Exfiltration</span>
-    <div class="nav-item" onclick="nav(this, 'overlay')">🖼️ Stealth Overlays</div>
-    <div class="nav-item" onclick="nav(this, 'vault')">📖 UC Master Archive</div>
+    <span class="nav-cat">Tutorials & Docs</span>
+    <div class="nav-item" onclick="nav(this, 'tut-spoofer')">🎭 Advanced Spoofing</div>
+    <div class="nav-item" onclick="nav(this, 'tut-engines')">🎮 SDK & Game Engines</div>
+    <div class="nav-item" onclick="nav(this, 'tut-syscalls')">⚡ ASM Syscalls</div>
+    <div class="nav-item" onclick="nav(this, 'tut-eac-be')">🔵 EAC & BattlEye</div>
+    
+    <span class="nav-cat">The Vault</span>
+    <div class="nav-item" onclick="nav(this, 'tut-overlays')">🖼️ Stealth Overlays</div>
+    <div class="nav-item" onclick="nav(this, 'tut-archive')">📖 UC Master Archive</div>
 </aside>
 
 <main class="main">
 
-    <section id="tutorials" class="section active">
-        <h1>Masterclass <span>Video Library</span></h1>
-        <div class="glass-card">
-            <h3>1. Engenharia Reversa com IDA Pro</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/Wn3_O8-Gv6U"></iframe>
+    <section id="vid-kernel" class="section active">
+        <h1>Kernel <span>Video Academy</span></h1>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-placeholder"><iframe src="https://www.youtube.com/embed/onfZ9xPWSvo"></iframe></div>
+                <div class="video-title">Como Drivers de Kernel Funcionam</div>
             </div>
-            <h3>2. Escrevendo seu primeiro Kernel Driver</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/onfZ9xPWSvo"></iframe>
+            <div class="video-card">
+                <div class="video-placeholder"><iframe src="https://www.youtube.com/embed/S2pP2L_4XIs"></iframe></div>
+                <div class="video-title">Instalando e Configurando o WDK</div>
+            </div>
+        </div>
+        <div class="module">
+            <div class="badge">TUTORIAL PASSO A PASSO</div>
+            <h3>Compilando seu Primeiro .sys</h3>
+            <div class="tutorial-step">
+                <h4>Passo 1: Visual Studio</h4>
+                <p>Abra o VS 2022, crie um novo projeto "Empty WDM Driver". Vá em Propriedades > C++ > General e desative "Security Check" (GS-).</p>
+            </div>
+            <div class="tutorial-step">
+                <h4>Passo 2: Driver Entry</h4>
+                <p>O driver não tem um `main()`. Ele usa o `DriverEntry`. É aqui que você inicializa a comunicação com o cheat.</p>
+                <pre>
+NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegistryPath) {
+    pDriverObject->DriverUnload = UnloadRoutine;
+    DbgPrint("HIT NEXUS: Driver carregado com sucesso!");
+    return STATUS_SUCCESS;
+}</pre>
             </div>
         </div>
     </section>
 
-    <section id="eac-be" class="section">
-        <h1>EAC & BattlEye <span>Internals</span></h1>
-        <div class="glass-card">
+    <section id="vid-reversing" class="section">
+        <h1>Reversing <span>Workshops</span></h1>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-placeholder"><iframe src="https://www.youtube.com/embed/Wn3_O8-Gv6U"></iframe></div>
+                <div class="video-title">IDA Pro para Iniciantes</div>
+            </div>
+            <div class="video-card">
+                <div class="video-placeholder"><iframe src="https://www.youtube.com/embed/K8_YF03A30U"></iframe></div>
+                <div class="video-title">Encontrando Offsets com Cheat Engine</div>
+            </div>
+        </div>
+        <div class="module">
+            <h3>Tutorial: Reconstrução de Classes</h3>
+            <p>Use o ReClass.NET para entender como o jogo organiza os dados na RAM.</p>
+            
+        </div>
+    </section>
+
+    <section id="tut-spoofer" class="section">
+        <h1>Advanced <span>Hardware Spoofing</span></h1>
+        <div class="module">
+            <div class="badge">ESTRATÉGIA KERNEL</div>
+            <p>Anti-cheats como o Vanguard lêem o número de série do seu SSD diretamente via comandos **NVMe/ATA**. Um spoofer simples de registro não funciona.</p>
+            
+            <div class="tutorial-step">
+                <h4>Ataque ao Disk.sys</h4>
+                <p>Você deve hookar a função <code>STORAGE_QUERY_PROPERTY</code> no driver de disco nativo do Windows.</p>
+                <pre>
+// Hooking do IRP para falsificar o Serial
+if (pStorageQuery->PropertyId == StorageDeviceProperty) {
+    PSTORAGE_DEVICE_DESCRIPTOR pDesc = (PSTORAGE_DEVICE_DESCRIPTOR)((PBYTE)pIrp->AssociatedIrp.SystemBuffer);
+    char* serial = (char*)pDesc + pDesc->SerialNumberOffset;
+    RtlCopyMemory(serial, "NEXUS-FAKE-SERIAL-1337", 22);
+}</pre>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="tut-engines" class="section">
+        <h1>SDK <span>& Engine Internals</span></h1>
+        <div class="module">
+            <h3>Unreal Engine 4/5 (GWorld & GObjects)</h3>
+            <p>O motor Unreal armazena todos os jogadores em um array dentro do **ULevel**.</p>
+            <pre>
+// Hierarquia de Memória UE4/5
+uintptr_t GWorld = Read<uintptr_t>(base + offset_gworld);
+uintptr_t OwningGameInstance = Read<uintptr_t>(GWorld + 0x180);
+uintptr_t LocalPlayers = Read<uintptr_t>(OwningGameInstance + 0x38);
+uintptr_t LocalPlayer = Read<uintptr_t>(LocalPlayers);</pre>
+            
+        </div>
+    </section>
+
+    <section id="tut-syscalls" class="section">
+        <h1>Direct <span>Syscalls (Assembly)</span></h1>
+        <div class="module">
+            <p>Bypasse o monitoramento da `ntdll.dll` chamando o processador diretamente.</p>
+            <div class="tutorial-step">
+                <h4>Tutorial: Implementando Syswhispers</h4>
+                <ol style="margin-left:20px; color:var(--dim)">
+                    <li>Gere os arquivos .asm e .h usando a ferramenta Syswhispers3.</li>
+                    <li>Adicione ao seu projeto C++.</li>
+                    <li>Chame `NtReadVirtualMemory` sem que o EAC perceba.</li>
+                </ol>
+            </div>
+            <pre>
+; syscall.asm para Windows 10
+public NtReadVirtualMemory
+NtReadVirtualMemory proc
+    mov r10, rcx
+    mov eax, 3Fh ; Syscall ID para Win10
+    syscall
+    ret
+NtReadVirtualMemory endp</pre>
+        </div>
+    </section>
+
+    <section id="tut-eac-be" class="section">
+        <h1>EAC & BattlEye <span>Deep Manual</span></h1>
+        <div class="module">
             <h3 style="color:var(--eac)">Easy Anti-Cheat (EAC)</h3>
-            <p>O EAC utiliza <b>"Heartbeats"</b>. Se o servidor não receber um sinal criptografado do driver a cada X segundos, você é desconectado.</p>
-            <table>
-                <tr><th>Vetor</th><th>Descrição</th></tr>
-                <tr><td>Cr3 Protection</td><td>Esconde diretórios de páginas para impedir leitura externa.</td></tr>
-                <tr><td>Stack Walking</td><td>Analisa quem chamou a função de leitura de memória.</td></tr>
-            </table>
-
-            <h3 style="color:var(--be); margin-top:20px;">BattlEye (BE)</h3>
-            <p>Famoso pelos <b>"Shellcode Tests"</b>. O BE envia pequenos códigos aleatórios para o seu PC e checa a resposta.</p>
-            
-        </div>
-    </section>
-
-    <section id="spoofer" class="section">
-        <h1>Hardware <span>Identity Spoofing</span></h1>
-        <div class="glass-card">
-            <p>Para remover um banimento de HWID, você deve atacar três frentes:</p>
-            <pre>
-// 1. Disk Serial (SMART Data)
-// 2. NIC MAC Address (Network)
-// 3. SMBIOS Tables (UUID/Serial da Placa Mãe)
-
-// Exemplo: Limpando rastros de Registro do Windows
-void CleanTraces() {
-    RegDeleteKey(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Enum\\IDE");
-    RegDeleteKey(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0");
-}
-            </pre>
-            
-        </div>
-    </section>
-
-    <section id="engines" class="section">
-        <h1>Unreal & Unity <span>SDK Generation</span></h1>
-        <div class="glass-card">
-            <h3>Unreal Engine 4/5</h3>
-            <pre>
-struct UWorld {
-    uintptr_t PersistentLevel; // GWorld + 0x30
-    uintptr_t OwningGameInstance; // GWorld + 0x180
-};
-// Caminho do Bone (Osso):
-// Mesh + StaticMesh + BoneArray + (BoneIndex * BoneSize)
-            </pre>
-            <h3>Unity (IL2CPP)</h3>
-            <p>No Unity moderno, os nomes das funções são ofuscados. Use o <b>Il2CppDumper</b> para restaurar a estrutura.</p>
-        </div>
-        
-    </section>
-
-    <section id="syscalls" class="section">
-        <h1>Direct Syscalls <span>(x64 Assembly)</span></h1>
-        <div class="glass-card">
-            <p>Ignora hooks na `ntdll.dll` executando a instrução `syscall` diretamente no hardware.</p>
-            <div style="color:var(--asm); font-family:'JetBrains Mono'; background:#000; padding:15px; border-radius:10px;">
-                mov r10, rcx<br>
-                mov eax, 3Fh ; NtReadVirtualMemory ID<br>
-                syscall<br>
-                ret
+            <p>O EAC foca em analisar a integridade do Windows. Se você desativar o **Driver Signature Enforcement**, ele não deixará o jogo abrir.</p>
+            <div class="warning-box">
+                <b>SOLUÇÃO:</b> Use um "Manual Mapper" para carregar seu driver dentro de um driver legítimo já assinado (como o da Intel ou Capcom).
             </div>
+            <h3 style="color:var(--be); margin-top:30px;">BattlEye (BE)</h3>
+            <p>O BE usa escaneamentos de memória dinâmicos. Ele procura por janelas transparentes no topo do jogo para detectar ESPs.</p>
+            
         </div>
     </section>
 
-    <section id="overlay" class="section">
-        <h1>Stealth <span>Overlay Tactics</span></h1>
+    <section id="tut-archive" class="section">
+        <h1>The <span>UC Master Archive</span></h1>
         <div class="glass-card">
-            <p>Como evitar ser detectado por <b>BitBlt</b> (captura de tela do Anti-Cheat):</p>
-            <ul>
-                <li>Use janelas com <b>WS_EX_LAYERED</b>.</li>
-                <li>Desenhe usando <b>Discord Overlay Hook</b> (o AC confia no Discord).</li>
-                <li>Use **Overlay via Hardware** (Overlay de monitores ou placas de vídeo).</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="vault" class="section">
-        <h1>UnKnoWnCheaTs <span>Legendary Archive</span></h1>
-        <div class="glass-card">
-            <p>As threads que mudaram a história:</p>
-            <table class="tech-table">
-                <tr><td><a href="#" style="color:var(--primary)">[Release] ReClass.NET</a></td><td>A ferramenta essencial para mapping de classes.</td></tr>
-                <tr><td><a href="#" style="color:var(--primary)">[Tutorial] Kernel MMU Manipulation</a></td><td>Como ler memória sem ser detectado.</td></tr>
-                <tr><td><a href="#" style="color:var(--primary)">[Source] KDU (Kernel Driver Utility)</a></td><td>Mapper universal para drivers não assinados.</td></tr>
+            <table style="width:100%; color:var(--dim); border-collapse:collapse;">
+                <tr style="border-bottom: 1px solid var(--border)">
+                    <td style="padding:15px; color:var(--primary)">[SOURCE]</td>
+                    <td>KDU Mapper - Bypass DSE indetectável</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                    <td style="padding:15px; color:var(--primary)">[TOOL]</td>
+                    <td>PDB Downloader - Para pegar símbolos do Windows</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border)">
+                    <td style="padding:15px; color:var(--primary)">[INFO]</td>
+                    <td>Vanguard TPM/Secure Boot Bypass Discussion</td>
+                </tr>
             </table>
         </div>
     </section>
