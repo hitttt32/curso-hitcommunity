@@ -3,167 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIT NEXUS | OMNI-RESOURCES v9</title>
+    <title>HIT NEXUS | THE SINGULARITY v10</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ff88; --bg: #020204; --surface: #0a0a0c; --card: #111114;
+            --primary: #00ff88; --bg: #010102; --surface: #0a0a0c; --card: #0f0f12;
             --border: #1f1f23; --text: #f8fafc; --dim: #64748b; --danger: #ff4655;
-            --vanguard: #ff4655; --eac: #3498db; --be: #f1c40f;
+            --vanguard: #ff4655; --eac: #3498db; --be: #f1c40f; --asm: #7d40ff;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
         body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; overflow-x: hidden; }
 
-        /* Sidebar Customizada */
+        /* Navigation */
         .sidebar {
             width: 320px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border);
-            position: fixed; padding: 40px 20px; overflow-y: auto; z-index: 1000;
+            position: fixed; padding: 30px 20px; overflow-y: auto; z-index: 1000;
         }
-        .nav-category { font-size: 0.65rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 0 10px; display: block; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; text-shadow: 0 0 15px rgba(0,255,136,0.2); }
+        .nav-category { font-size: 0.65rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 25px 0 10px; display: block; }
         .nav-item { 
             display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; 
             color: #8892b0; text-decoration: none; font-size: 0.85rem; transition: 0.3s; margin-bottom: 4px; cursor: pointer;
         }
         .nav-item:hover { background: rgba(255,255,255,0.03); color: var(--primary); }
-        .nav-item.active { background: rgba(0, 255, 136, 0.1); color: var(--primary); font-weight: 700; }
+        .nav-item.active { background: rgba(0, 255, 136, 0.1); color: var(--primary); font-weight: 700; border: 1px solid rgba(0, 255, 136, 0.2); }
 
-        /* Area Principal */
+        /* Content */
         .main { margin-left: 320px; width: 100%; padding: 60px 80px; }
         .section { display: none; animation: fadeIn 0.4s ease-out; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* UI Cards e Elementos */
-        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 35px; margin-bottom: 30px; position: relative; }
-        .badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; background: rgba(255,255,255,0.05); }
+        /* UI Elements */
+        h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
+        h1 span { color: var(--primary); }
+        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 35px; margin-bottom: 30px; line-height: 1.6; }
         
-        pre { background: #000; padding: 25px; border-radius: 12px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: #a5d6ff; overflow-x: auto; margin: 20px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .warning-box { border-left: 4px solid var(--danger); background: rgba(255, 70, 85, 0.05); padding: 20px; border-radius: 12px; margin: 20px 0; font-size: 0.9rem; }
+        /* Tables */
+        .tech-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
+        .tech-table th { background: #16161a; padding: 15px; text-align: left; border-bottom: 2px solid var(--border); color: var(--dim); }
+        .tech-table td { padding: 15px; border-bottom: 1px solid var(--border); }
 
-        /* Simulações */
-        #sim-box { background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); font-family: 'JetBrains Mono'; }
-        .hex-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-bottom: 15px; }
-        .hex-item { cursor: pointer; padding: 5px; text-align: center; border-radius: 4px; color: var(--dim); transition: 0.2s; }
-        .hex-item:hover { background: var(--primary); color: #000; }
-        .target-offset { color: var(--primary); font-weight: bold; border: 1px solid var(--primary); }
+        /* Code Block */
+        .code-wrap { position: relative; margin: 25px 0; }
+        .code-lang { position: absolute; top: -10px; right: 20px; background: var(--primary); color: #000; padding: 2px 10px; border-radius: 4px; font-size: 0.6rem; font-weight: 800; z-index: 5; }
+        pre { background: #000; padding: 25px; border-radius: 15px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: #a5d6ff; overflow-x: auto; }
+        
+        .warning-box { border-left: 4px solid var(--danger); background: rgba(255, 70, 85, 0.05); padding: 25px; border-radius: 12px; margin: 20px 0; }
+        
+        /* Simulators */
+        #hex-view { background: #000; padding: 25px; border-radius: 15px; border: 1px solid var(--primary); }
+        .hex-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; margin-bottom: 10px; }
+        .hex-cell { padding: 8px; text-align: center; background: #0a0a0c; border: 1px solid #1a1a1c; cursor: pointer; border-radius: 5px; color: var(--dim); transition: 0.2s; }
+        .hex-cell:hover { background: var(--primary); color: #000; border-color: var(--primary); }
+        .hex-cell.active { color: var(--primary); border-color: var(--primary); box-shadow: 0 0 10px rgba(0,255,136,0.2); }
+
+        .image-placeholder { background: #111; border: 2px dashed #222; border-radius: 15px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 25px 0; color: #444; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
 
 <aside class="sidebar">
-    <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; letter-spacing: -1px;">HIT_NEXUS_V9</div>
+    <div class="logo">HIT_NEXUS_v10</div>
     
-    <span class="nav-category">Intelligence Hub</span>
-    <div class="nav-item active" onclick="nav(this, 'ac-manual')">📡 Anti-Cheat Manual</div>
-    <div class="nav-item" onclick="nav(this, 'reversing')">🔍 Reversing Simulator</div>
+    <span class="nav-category">Anti-Cheat Deep Dive</span>
+    <div class="nav-item active" onclick="nav(this, 'ac-internals')">🛡️ AC Internal Manual</div>
+    <div class="nav-item" onclick="nav(this, 'vanguard')">🔴 Vanguard (Boot-Time)</div>
+    <div class="nav-item" onclick="nav(this, 'eac-be')">🔵 EAC & BattlEye</div>
     
-    <span class="nav-category">Kernel & Bypassing</span>
-    <div class="nav-item" onclick="nav(this, 'kernel')">🛡️ Driver & Ring 0</div>
-    <div class="nav-item" onclick="nav(this, 'spoofer')">🎭 HWID Spoofer</div>
-    <div class="nav-item" onclick="nav(this, 'syscalls')">⚡ Direct Syscalls</div>
+    <span class="nav-category">Reversing & Engines</span>
+    <div class="nav-item" onclick="nav(this, 'reversing')">🔍 Memory Lab (Sim)</div>
+    <div class="nav-item" onclick="nav(this, 'engines')">🎮 Unreal & Unity SDK</div>
+    
+    <span class="nav-category">Kernel Exploitation</span>
+    <div class="nav-item" onclick="nav(this, 'kernel')">💻 Driver Development</div>
+    <div class="nav-item" onclick="nav(this, 'spoofer')">🎭 Hardware Spoofing</div>
+    <div class="nav-item" onclick="nav(this, 'syscalls')">⚡ Direct Syscalls (ASM)</div>
 
-    <span class="nav-category">Advanced Rendering</span>
-    <div class="nav-item" onclick="nav(this, 'overlay')">🖼️ Ghost GDI+ Overlay</div>
-    <div class="nav-item" onclick="nav(this, 'dualpc')">💻 Dual-PC Network</div>
-
-    <span class="nav-category">Development</span>
-    <div class="nav-item" onclick="nav(this, 'compiler')">🛠️ WDK Compiler Guide</div>
-    <div class="nav-item" onclick="nav(this, 'vault')">📚 UC Legendary Vault</div>
+    <span class="nav-category">Exfiltration & Stealth</span>
+    <div class="nav-item" onclick="nav(this, 'dualpc')">📡 Dual-PC & DMA</div>
+    <div class="nav-item" onclick="nav(this, 'overlay')">🖼️ Stealth Overlays</div>
+    
+    <span class="nav-category">The Vault</span>
+    <div class="nav-item" onclick="nav(this, 'vault')">📖 UC Master Archive</div>
 </aside>
 
 <main class="main">
 
-    <section id="ac-manual" class="section active">
-        <h1>Anti-Cheat <span>Internal Intel</span></h1>
-        <div class="grid" style="margin-top:30px;">
-            <div class="glass-card" style="border-top: 4px solid var(--vanguard);">
-                <h3>Vanguard (Riot)</h3>
-                <p style="color:var(--dim); font-size: 0.9rem;">Proteção Boot-time. Valida TPM 2.0 e Secure Boot via UEFI. Monitora IOMMU para bloquear ataques de DMA.</p>
-            </div>
-            <div class="glass-card" style="border-top: 4px solid var(--eac);">
-                <h3>Easy Anti-Cheat</h3>
-                <p style="color:var(--dim); font-size: 0.9rem;">Foca em integridade de memória (Copy-on-Write) e validação de Call Stack para detectar injeções externas.</p>
+    <section id="ac-internals" class="section active">
+        <h1>Internal <span>Anti-Cheat Intel</span></h1>
+        <p style="color:var(--dim)">Um guia exaustivo sobre como os guardiões de Ring 0 operam no Windows 10/11.</p>
+        
+        
+
+        <div class="glass-card">
+            <h3>Métodos de Escaneamento</h3>
+            <table class="tech-table">
+                <tr><th>Método</th><th>Descrição Técnica</th><th>Status de Detecção</th></tr>
+                <tr><td>Signature Scan</td><td>Busca sequências específicas de bytes na memória (RAM).</td><td>ALTO (Públicos)</td></tr>
+                <tr><td>IAT Hooking</td><td>Monitora chamadas a funções críticas (ex: ReadProcessMemory).</td><td>MÉDIO</td></tr>
+                <tr><td>Heurística</td><td>Analisa padrões de movimento do mouse e tempos de reação.</td><td>IA (Dificil)</td></tr>
+                <tr><td>MSR Polling</td><td>Verifica se registros do processador foram alterados por um Hypervisor.</td><td>KERNEL ONLY</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="vanguard" class="section">
+        <h1>Vanguard <span>(Riot Games)</span></h1>
+        <div class="warning-box">
+            <b>BOOT-TIME PERSISTENCE:</b> O Vanguard carrega o driver <code>vgk.sys</code> no início do boot, impedindo que você carregue drivers não assinados antes dele.
+        </div>
+        <div class="glass-card">
+            <h3>A Guerra do TPM 2.0</h3>
+            <p>A Riot exige TPM 2.0 e Secure Boot. Bypasses modernos envolvem o uso de <b>EFI Runtime Services Hooks</b> ou <b>TPM Emulators</b> em nível de hardware.</p>
+            <div class="code-wrap">
+                <span class="code-lang">C++</span>
+                <pre>
+// Hooking do ExitBootServices para persistência UEFI
+EFI_STATUS EFIAPI HookedExitBootServices(EFI_HANDLE ImageHandle, UINTN Key) {
+    // Esconde o driver malicioso na memória escondida antes do SO carregar
+    Log("Persistindo no Kernel via UEFI...");
+    return OriginalExit(ImageHandle, Key);
+}
+                </pre>
             </div>
         </div>
-        
     </section>
 
     <section id="reversing" class="section">
-        <h1>Reversing <span>Simulator</span></h1>
+        <h1>Advanced <span>Reversing Lab</span></h1>
         <div class="glass-card">
-            <h3>Objetivo: Encontre o Pointer de Vida (HP)</h3>
-            <p style="color:var(--dim); margin-bottom: 20px;">Analise os offsets da classe <code>C_BaseEntity</code> para localizar o valor da vida.</p>
-            <div id="sim-box">
-                <div class="hex-grid" id="hex-container"></div>
-                <div id="hex-desc" style="padding-top:15px; border-top:1px solid #222; font-size: 0.8rem; color: var(--primary);">CLIQUE EM UM OFFSET...</div>
+            <h3>Simulador de Estrutura de Classe</h3>
+            <p style="margin-bottom:20px;">Clique nos endereços de memória para identificar os membros da classe <code>BaseEntity</code>.</p>
+            <div id="hex-view">
+                <div class="hex-row" id="hex-container"></div>
+                <div id="hex-info" style="margin-top:20px; padding:15px; background: rgba(0,255,136,0.05); color: var(--primary); border-radius: 8px;">
+                    AGUARDANDO INPUT...
+                </div>
             </div>
         </div>
         
     </section>
 
     <section id="kernel" class="section">
-        <h1>Kernel <span>Mode Driver</span></h1>
-        <div class="warning-box">Atenção: Drivers de Kernel sem assinatura exigem um "Mapper" para burlar a Driver Signature Enforcement (DSE).</div>
-        <pre>
-// Exemplo: Lendo Memória Física via MmCopyVirtualMemory
-NTSTATUS KeReadVirtualMemory(PEPROCESS Process, PVOID SourceAddress, PVOID TargetAddress, SIZE_T Size) {
-    PSIZE_T Bytes;
-    return MmCopyVirtualMemory(Process, SourceAddress, PsGetCurrentProcess(), TargetAddress, Size, KernelMode, &Bytes);
-}
-        </pre>
-    </section>
-
-    <section id="spoofer" class="section">
-        <h1>HWID <span>Identity Spoofer</span></h1>
+        <h1>Kernel <span>Driver Development</span></h1>
         <div class="glass-card">
-            <p>O spoofer atua mudando os números de série no nível de driver (Disk.sys / Net.sys).</p>
-            <pre>
-// Hooking Storage Query para mudar Serial de Disco
-if (StorageDeviceProperty == Query->PropertyId) {
-    PSTORAGE_DEVICE_DESCRIPTOR descriptor = (PSTORAGE_DEVICE_DESCRIPTOR)buffer;
-    char* serial = (char*)descriptor + descriptor->SerialNumberOffset;
-    strcpy(serial, "NEXUS-778-SAFE");
+            <h3>Comunicação Segura (IOCTL)</h3>
+            <p>Para ler a memória sem ser detectado, seu driver deve evitar o uso de APIs conhecidas e usar técnicas de <b>Memory Physical Mapping</b>.</p>
+            <div class="code-wrap">
+                <span class="code-lang">C (Kernel)</span>
+                <pre>
+NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
+    // Criando o dispositivo para comunicação com o User-Mode
+    IoCreateDevice(DriverObject, 0, &devName, FILE_DEVICE_UNKNOWN, ...);
+    DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = NexusControl;
+    return STATUS_SUCCESS;
 }
-            </pre>
-        </div>
-    </section>
 
-    <section id="overlay" class="section">
-        <h1>Ghost <span>GDI+ Rendering</span></h1>
-        <div class="glass-card">
-            <p>Renderização sem DirectX. Usa <code>SetLayeredWindowAttributes</code> para criar uma janela transparente e indetectável por BitBlt.</p>
-            <pre>
-// Setup da Janela de Overlay
-SetWindowLong(hwnd, GWL_EXSTYLE, dwStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT);
-SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_COLORKEY);
-// Render com GDI+ Graphics
-graphics.DrawRectangle(&greenPen, x, y, w, h);
-            </pre>
+// Bypassing CR3 Protection
+void ReadPhysicalMemory(uintptr_t physical_address, PVOID buffer, SIZE_T size) {
+    PVOID mapped = mmMapIoSpace(physical_address, size, MmNonCached);
+    memcpy(buffer, mapped, size);
+    mmUnmapIoSpace(mapped, size);
+}
+                </pre>
+            </div>
         </div>
     </section>
 
     <section id="dualpc" class="section">
-        <h1>Dual-PC <span>Networking</span></h1>
-        <div class="glass-card">
-            <p>O PC-A envia pacotes UDP com dados da memória para o PC-B. O AC no PC-A nunca detecta o software de desenho (ESP).</p>
-            
-        </div>
-    </section>
+        <h1>DMA <span>& Dual-PC Hardware</span></h1>
+        <p>O "Santo Graal" do Game Hacking. Nenhuma linha de código de cheat roda no computador do jogo.</p>
+        
+        
 
-    <section id="vault" class="section">
-        <h1>Legendary <span>Vault (UC)</span></h1>
-        <div class="grid">
-            <a href="https://www.unknowncheats.me/forum/programming-for-beginners/121017-start-here-beginners-guide-learning-game-hacking.html" target="_blank" class="nav-item" style="background:var(--card);">🏆 UC Beginner Roadmap</a>
-            <a href="https://www.unknowncheats.me/forum/anti-cheat-bypass/150170-battleye-internals.html" target="_blank" class="nav-item" style="background:var(--card);">🛡️ BattlEye Internals Deep Dive</a>
+        <div class="glass-card">
+            <h3>Arquitetura DMA</h3>
+            <ol style="margin-left: 20px; line-height: 2;">
+                <li><b>Hardware:</b> Placa FPGA (ex: Screamer M.2) conectada ao PC do Jogo.</li>
+                <li><b>PC de Análise:</b> Conectado via cabo USB-C à placa FPGA.</li>
+                <li><b>Ocultação:</b> O Anti-Cheat vê a placa como um dispositivo USB comum (Mouse/Teclado).</li>
+            </ol>
+            <div class="code-wrap">
+                <span class="code-lang">Python (Second PC)</span>
+                <pre>
+import vmmpy
+# Lendo vida do jogador remotamente via DMA
+vmm = vmmpy.VMM(["-device", "fpga"])
+mem = vmm.memory.read(0xDEADBEEF, 0x4)
+print(f"Player HP via DMA: {mem}")
+                </pre>
+            </div>
         </div>
     </section>
 
 </main>
 
 <script>
-    // Sistema de Navegação
     function nav(btn, id) {
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -172,26 +209,30 @@ graphics.DrawRectangle(&greenPen, x, y, w, h);
         window.scrollTo(0,0);
     }
 
-    // Gerador do Simulador de Reversing
     const offsets = [
-        {off: '0x00', desc: 'VTable Pointer'}, {off: '0x08', desc: 'Model Index'},
-        {off: '0x10', desc: 'HEALTH (ALVO!)', target: true}, {off: '0x18', desc: 'Team Number'},
-        {off: '0x20', desc: 'Origin X'}, {off: '0x24', desc: 'Origin Y'},
-        {off: '0x28', desc: 'Origin Z'}, {off: '0x30', desc: 'Velocity Vector'}
+        {off: '0x00', desc: 'VTable Pointer (Endereço das funções virtuais)', data: '0x7FF64A22'},
+        {off: '0x08', desc: 'Health Points (Float: 100.0f)', data: '100.0'},
+        {off: '0x10', desc: 'Team ID (Int: 2)', data: '2'},
+        {off: '0x18', desc: 'Coordinate X (Float)', data: '1442.22'},
+        {off: '0x20', desc: 'Coordinate Y (Float)', data: '332.1'},
+        {off: '0x28', desc: 'Coordinate Z (Float)', data: '10.5'},
+        {off: '0x30', desc: 'Name Pointer', data: '0x0022AF11'},
+        {off: '0x38', desc: 'IsInvisible (Bool)', data: 'False'}
     ];
 
     const container = document.getElementById('hex-container');
-    const desc = document.getElementById('hex-desc');
+    const info = document.getElementById('hex-info');
 
     offsets.forEach(o => {
-        const div = document.createElement('div');
-        div.className = 'hex-item' + (o.target ? ' target-offset' : '');
-        div.innerHTML = o.off;
-        div.onclick = () => {
-            desc.innerHTML = `OFFSET: ${o.off} | DESC: ${o.desc}`;
-            desc.style.color = o.target ? '#00ff88' : '#64748b';
+        const cell = document.createElement('div');
+        cell.className = 'hex-cell';
+        cell.innerHTML = o.off;
+        cell.onclick = () => {
+            document.querySelectorAll('.hex-cell').forEach(c => c.classList.remove('active'));
+            cell.classList.add('active');
+            info.innerHTML = `<strong>${o.off}</strong>: ${o.desc} | <span style="color:#fff">VALOR ATUAL: ${o.data}</span>`;
         };
-        container.appendChild(div);
+        container.appendChild(cell);
     });
 </script>
 
