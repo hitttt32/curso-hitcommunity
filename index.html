@@ -3,224 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HitCommunity | OMNIS FRAMEWORK</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <title>HIT NEXUS | OMNI-RESOURCES v9</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00ff88;
-            --bg: #050505;
-            --surface: #0d0d0f;
-            --border: #1f1f23;
-            --text: #e2e8f0;
-            --dim: #64748b;
-            --accent: #ff0055;
-            --uc-gold: #ffcc00;
+            --primary: #00ff88; --bg: #020204; --surface: #0a0a0c; --card: #111114;
+            --border: #1f1f23; --text: #f8fafc; --dim: #64748b; --danger: #ff4655;
+            --vanguard: #ff4655; --eac: #3498db; --be: #f1c40f;
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; }
+        * { margin:0; padding:0; box-sizing:border-box; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; overflow-x: hidden; }
 
-        /* Sidebar Fixa */
+        /* Sidebar Customizada */
         .sidebar {
-            width: 300px; background: var(--surface); border-right: 1px solid var(--border);
-            position: fixed; height: 100vh; padding: 30px 20px; overflow-y: auto;
-            z-index: 100;
+            width: 320px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border);
+            position: fixed; padding: 40px 20px; overflow-y: auto; z-index: 1000;
         }
-
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
-
-        .nav-group { margin-bottom: 30px; }
-        .nav-label { font-size: 0.7rem; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; }
-
-        .nav-item {
-            padding: 12px 15px; margin-bottom: 5px; border-radius: 8px; cursor: pointer;
-            color: #888; transition: 0.2s; font-size: 0.9rem; border: 1px solid transparent;
+        .nav-category { font-size: 0.65rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin: 25px 0 10px; display: block; }
+        .nav-item { 
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; 
+            color: #8892b0; text-decoration: none; font-size: 0.85rem; transition: 0.3s; margin-bottom: 4px; cursor: pointer;
         }
         .nav-item:hover { background: rgba(255,255,255,0.03); color: var(--primary); }
-        .nav-item.active { background: rgba(0,255,136,0.1); color: var(--primary); border-color: rgba(0,255,136,0.2); }
+        .nav-item.active { background: rgba(0, 255, 136, 0.1); color: var(--primary); font-weight: 700; }
 
         /* Area Principal */
-        .main-content { margin-left: 300px; width: calc(100% - 300px); padding: 60px; }
-
+        .main { margin-left: 320px; width: 100%; padding: 60px 80px; }
         .section { display: none; animation: fadeIn 0.4s ease-out; }
         .section.active { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* UI Elements */
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 30px; }
-        .badge { background: var(--primary); color: #000; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; margin-bottom: 15px; display: inline-block; }
+        /* UI Cards e Elementos */
+        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 35px; margin-bottom: 30px; position: relative; }
+        .badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block; background: rgba(255,255,255,0.05); }
         
-        pre { background: #000; padding: 25px; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.6; border: 1px solid #222; overflow-x: auto; margin: 20px 0; color: #a9b7c6; }
-        .k { color: #cc7832; } .f { color: #ffc66d; } .c { color: #808080; }
+        pre { background: #000; padding: 25px; border-radius: 12px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: #a5d6ff; overflow-x: auto; margin: 20px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .warning-box { border-left: 4px solid var(--danger); background: rgba(255, 70, 85, 0.05); padding: 20px; border-radius: 12px; margin: 20px 0; font-size: 0.9rem; }
 
-        .video-box { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; margin: 25px 0; border: 1px solid #333; }
-        .video-box iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
-
-        .btn-uc { display: inline-block; border: 1px solid var(--uc-gold); color: var(--uc-gold); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
-        .btn-uc:hover { background: var(--uc-gold); color: #000; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { color: var(--dim); font-size: 0.8rem; text-transform: uppercase; }
-
-        @media (max-width: 1024px) {
-            .sidebar { width: 80px; padding: 20px 10px; }
-            .nav-item span, .nav-label, .logo { display: none; }
-            .main-content { margin-left: 80px; width: calc(100% - 80px); padding: 30px; }
-        }
+        /* Simulações */
+        #sim-box { background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); font-family: 'JetBrains Mono'; }
+        .hex-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-bottom: 15px; }
+        .hex-item { cursor: pointer; padding: 5px; text-align: center; border-radius: 4px; color: var(--dim); transition: 0.2s; }
+        .hex-item:hover { background: var(--primary); color: #000; }
+        .target-offset { color: var(--primary); font-weight: bold; border: 1px solid var(--primary); }
     </style>
 </head>
 <body>
 
 <aside class="sidebar">
-    <div class="logo">HitOmnis</div>
+    <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; letter-spacing: -1px;">HIT_NEXUS_V9</div>
     
-    <div class="nav-group">
-        <span class="nav-label">Academia Básica</span>
-        <div class="nav-item active" onclick="showSection(this, 'welcome')">🏠 <span>Início & Roadmap</span></div>
-        <div class="nav-item" onclick="showSection(this, 'user-mode')">💉 <span>User-Mode (R3)</span></div>
-        <div class="nav-item" onclick="showSection(this, 'reversing')">🔍 <span>Engenharia Reversa</span></div>
-    </div>
+    <span class="nav-category">Intelligence Hub</span>
+    <div class="nav-item active" onclick="nav(this, 'ac-manual')">📡 Anti-Cheat Manual</div>
+    <div class="nav-item" onclick="nav(this, 'reversing')">🔍 Reversing Simulator</div>
+    
+    <span class="nav-category">Kernel & Bypassing</span>
+    <div class="nav-item" onclick="nav(this, 'kernel')">🛡️ Driver & Ring 0</div>
+    <div class="nav-item" onclick="nav(this, 'spoofer')">🎭 HWID Spoofer</div>
+    <div class="nav-item" onclick="nav(this, 'syscalls')">⚡ Direct Syscalls</div>
 
-    <div class="nav-group">
-        <span class="nav-label">Avançado</span>
-        <div class="nav-item" onclick="showSection(this, 'kernel')">🛡️ <span>Kernel-Mode (R0)</span></div>
-        <div class="nav-item" onclick="showSection(this, 'bypass')">🔓 <span>Bypass & Stealth</span></div>
-        <div class="nav-item" onclick="showSection(this, 'math')">📐 <span>Matemática de Cheat</span></div>
-    </div>
+    <span class="nav-category">Advanced Rendering</span>
+    <div class="nav-item" onclick="nav(this, 'overlay')">🖼️ Ghost GDI+ Overlay</div>
+    <div class="nav-item" onclick="nav(this, 'dualpc')">💻 Dual-PC Network</div>
 
-    <div class="nav-group">
-        <span class="nav-label">Recursos UC</span>
-        <div class="nav-item" onclick="showSection(this, 'references')">📚 <span>Master Links UC</span></div>
-    </div>
+    <span class="nav-category">Development</span>
+    <div class="nav-item" onclick="nav(this, 'compiler')">🛠️ WDK Compiler Guide</div>
+    <div class="nav-item" onclick="nav(this, 'vault')">📚 UC Legendary Vault</div>
 </aside>
 
-<main class="main-content">
+<main class="main">
 
-    <section id="welcome" class="section active">
-        <div class="card">
-            <span class="badge">SISTEMA ONLINE</span>
-            <h1>Roadmap de Aprendizado 2026</h1>
-            <p>Este portal consolida os conhecimentos da **UnKnoWnCheaTs** e **Guided Hacking** em um guia único. O caminho recomendado é: C++ → Memory Scanning → Reversing → Kernel.</p>
-            <div class="video-box">
-                <iframe src="https://www.youtube-nocookie.com/embed/onfZ9xPWSvo" allowfullscreen></iframe>
+    <section id="ac-manual" class="section active">
+        <h1>Anti-Cheat <span>Internal Intel</span></h1>
+        <div class="grid" style="margin-top:30px;">
+            <div class="glass-card" style="border-top: 4px solid var(--vanguard);">
+                <h3>Vanguard (Riot)</h3>
+                <p style="color:var(--dim); font-size: 0.9rem;">Proteção Boot-time. Valida TPM 2.0 e Secure Boot via UEFI. Monitora IOMMU para bloquear ataques de DMA.</p>
             </div>
-            <a href="https://www.unknowncheats.me/forum/programming-for-beginners/121017-start-here-beginners-guide-learning-game-hacking.html" target="_blank" class="btn-uc">LER GUIA ORIGINAL NA UC</a>
-        </div>
-    </section>
-
-    <section id="user-mode" class="section">
-        <div class="card">
-            <span class="badge">RING 3</span>
-            <h1>User-Mode Manipulation</h1>
-            <p>Foco em processos que não possuem proteção agressiva. Aprenda a abrir processos e injetar DLLs.</p>
-            <pre>
-<span class="c">// Abre o processo para leitura e escrita</span>
-<span class="k">HANDLE</span> hProc = OpenProcess(PROCESS_ALL_ACCESS, <span class="k">FALSE</span>, processID);
-
-<span class="c">// Lê um valor de memória (ex: Munição)</span>
-<span class="k">int</span> ammo = 0;
-ReadProcessMemory(hProc, (<span class="k">LPCVOID</span>)addr, &ammo, <span class="k">sizeof</span>(ammo), <span class="k">NULL</span>);
-            </pre>
-            <div class="video-box">
-                <iframe src="https://www.youtube-nocookie.com/embed/NgPKBRIFU5k" allowfullscreen></iframe>
+            <div class="glass-card" style="border-top: 4px solid var(--eac);">
+                <h3>Easy Anti-Cheat</h3>
+                <p style="color:var(--dim); font-size: 0.9rem;">Foca em integridade de memória (Copy-on-Write) e validação de Call Stack para detectar injeções externas.</p>
             </div>
         </div>
+        
     </section>
 
     <section id="reversing" class="section">
-        <div class="card">
-            <span class="badge">REVERSING</span>
-            <h1>Engenharia Reversa Estática</h1>
-            <p>O uso do IDA Pro e ReClass.NET para entender a estrutura de classes de motores como Unreal Engine.</p>
-            
-            <div class="video-box">
-                <iframe src="https://www.youtube-nocookie.com/embed/0_Eif2qGK7I" allowfullscreen></iframe>
+        <h1>Reversing <span>Simulator</span></h1>
+        <div class="glass-card">
+            <h3>Objetivo: Encontre o Pointer de Vida (HP)</h3>
+            <p style="color:var(--dim); margin-bottom: 20px;">Analise os offsets da classe <code>C_BaseEntity</code> para localizar o valor da vida.</p>
+            <div id="sim-box">
+                <div class="hex-grid" id="hex-container"></div>
+                <div id="hex-desc" style="padding-top:15px; border-top:1px solid #222; font-size: 0.8rem; color: var(--primary);">CLIQUE EM UM OFFSET...</div>
             </div>
-            <a href="https://www.unknowncheats.me/forum/cheat-engine/134446-cheat-engine-beginner-guide-tutorial.html" target="_blank" class="btn-uc">REFERÊNCIA: UC MEMORY SCANNING</a>
         </div>
+        
     </section>
 
     <section id="kernel" class="section">
-        <div class="card">
-            <span class="badge" style="background: var(--accent);">RING 0</span>
-            <h1>Kernel-Mode Drivers</h1>
-            <p>Como operar abaixo do Anti-Cheat. Essencial para contornar proteções como EAC e BattlEye.</p>
-            
+        <h1>Kernel <span>Mode Driver</span></h1>
+        <div class="warning-box">Atenção: Drivers de Kernel sem assinatura exigem um "Mapper" para burlar a Driver Signature Enforcement (DSE).</div>
+        <pre>
+// Exemplo: Lendo Memória Física via MmCopyVirtualMemory
+NTSTATUS KeReadVirtualMemory(PEPROCESS Process, PVOID SourceAddress, PVOID TargetAddress, SIZE_T Size) {
+    PSIZE_T Bytes;
+    return MmCopyVirtualMemory(Process, SourceAddress, PsGetCurrentProcess(), TargetAddress, Size, KernelMode, &Bytes);
+}
+        </pre>
+    </section>
+
+    <section id="spoofer" class="section">
+        <h1>HWID <span>Identity Spoofer</span></h1>
+        <div class="glass-card">
+            <p>O spoofer atua mudando os números de série no nível de driver (Disk.sys / Net.sys).</p>
             <pre>
-<span class="c">// Copiando memória no Kernel via MmCopyVirtualMemory</span>
-<span class="k">NTSTATUS</span> KeReadMem(PEPROCESS Proc, <span class="k">PVOID</span> Src, <span class="k">PVOID</span> Dest, <span class="k">SIZE_T</span> Size) {
-    <span class="k">SIZE_T</span> bytes;
-    <span class="k">return</span> MmCopyVirtualMemory(Proc, Src, PsGetCurrentProcess(), Dest, Size, KernelMode, &bytes);
+// Hooking Storage Query para mudar Serial de Disco
+if (StorageDeviceProperty == Query->PropertyId) {
+    PSTORAGE_DEVICE_DESCRIPTOR descriptor = (PSTORAGE_DEVICE_DESCRIPTOR)buffer;
+    char* serial = (char*)descriptor + descriptor->SerialNumberOffset;
+    strcpy(serial, "NEXUS-778-SAFE");
 }
             </pre>
-            <div class="video-box">
-                <iframe src="https://www.youtube-nocookie.com/embed/rOMhIsa8Xds" allowfullscreen></iframe>
-            </div>
         </div>
     </section>
 
-    <section id="bypass" class="section">
-        <div class="card">
-            <h1>Técnicas de Bypass & Stealth</h1>
-            <table>
-                <tr><th>Técnica</th><th>Descrição</th><th>Dificuldade</th></tr>
-                <tr><td>Manual Map</td><td>Injeta DLL sem deixar rastros na PEB (Module List).</td><td>Média</td></tr>
-                <tr><td>VMT Hook</td><td>Substitui endereços na tabela de funções virtuais.</td><td>Alta</td></tr>
-                <tr><td>HWID Spoofer</td><td>Altera IDs de hardware para evitar bans permanentes.</td><td>Expert</td></tr>
-                <tr><td>Direct Syscalls</td><td>Pula os hooks da NTDLL falando direto com o Kernel.</td><td>Expert</td></tr>
-            </table>
-        </div>
-    </section>
-
-    <section id="math" class="section">
-        <div class="card">
-            <h1>Matemática de Aimbot</h1>
-            <p>Cálculo de ângulos Euler (Pitch/Yaw) para alinhar a mira com o alvo.</p>
-            
+    <section id="overlay" class="section">
+        <h1>Ghost <span>GDI+ Rendering</span></h1>
+        <div class="glass-card">
+            <p>Renderização sem DirectX. Usa <code>SetLayeredWindowAttributes</code> para criar uma janela transparente e indetectável por BitBlt.</p>
             <pre>
-<span class="c">// Cálculo básico de Aimbot</span>
-Vector3 delta = enemyPos - localPos;
-<span class="k">float</span> hyp = sqrt(delta.x*delta.x + delta.y*delta.y);
-angles.pitch = -atan2(delta.z, hyp) * (180/PI);
-angles.yaw = atan2(delta.y, delta.x) * (180/PI);
+// Setup da Janela de Overlay
+SetWindowLong(hwnd, GWL_EXSTYLE, dwStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_COLORKEY);
+// Render com GDI+ Graphics
+graphics.DrawRectangle(&greenPen, x, y, w, h);
             </pre>
         </div>
     </section>
 
-    <section id="references" class="section">
-        <div class="card">
-            <h1>UnKnoWnCheaTs Master Library</h1>
-            <p>Links diretos para as threads mais importantes da história do game hacking.</p>
-            <ul style="margin-top: 20px; list-style: none;">
-                <li style="margin-bottom: 15px;">
-                    <strong>UC Wiki Oficial:</strong> O guia enciclopédico.<br>
-                    <a href="https://www.unknowncheats.me/wiki/" target="_blank" class="btn-uc" style="margin-top:5px;">ABRIR WIKI</a>
-                </li>
-                <li style="margin-bottom: 15px;">
-                    <strong>Anti-Cheat Bypass Thread:</strong> Discussões sobre EAC/BE.<br>
-                    <a href="https://www.unknowncheats.me/forum/anti-cheat-bypass/" target="_blank" class="btn-uc" style="margin-top:5px;">DISCUSSÕES AVANÇADAS</a>
-                </li>
-            </ul>
+    <section id="dualpc" class="section">
+        <h1>Dual-PC <span>Networking</span></h1>
+        <div class="glass-card">
+            <p>O PC-A envia pacotes UDP com dados da memória para o PC-B. O AC no PC-A nunca detecta o software de desenho (ESP).</p>
+            
+        </div>
+    </section>
+
+    <section id="vault" class="section">
+        <h1>Legendary <span>Vault (UC)</span></h1>
+        <div class="grid">
+            <a href="https://www.unknowncheats.me/forum/programming-for-beginners/121017-start-here-beginners-guide-learning-game-hacking.html" target="_blank" class="nav-item" style="background:var(--card);">🏆 UC Beginner Roadmap</a>
+            <a href="https://www.unknowncheats.me/forum/anti-cheat-bypass/150170-battleye-internals.html" target="_blank" class="nav-item" style="background:var(--card);">🛡️ BattlEye Internals Deep Dive</a>
         </div>
     </section>
 
 </main>
 
 <script>
-    function showSection(btn, sectionId) {
-        // Resetar Nav
+    // Sistema de Navegação
+    function nav(btn, id) {
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Resetar Seções
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
-
-        // Scroll Top
-        window.scrollTo({ top: 0 });
+        btn.classList.add('active');
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0,0);
     }
+
+    // Gerador do Simulador de Reversing
+    const offsets = [
+        {off: '0x00', desc: 'VTable Pointer'}, {off: '0x08', desc: 'Model Index'},
+        {off: '0x10', desc: 'HEALTH (ALVO!)', target: true}, {off: '0x18', desc: 'Team Number'},
+        {off: '0x20', desc: 'Origin X'}, {off: '0x24', desc: 'Origin Y'},
+        {off: '0x28', desc: 'Origin Z'}, {off: '0x30', desc: 'Velocity Vector'}
+    ];
+
+    const container = document.getElementById('hex-container');
+    const desc = document.getElementById('hex-desc');
+
+    offsets.forEach(o => {
+        const div = document.createElement('div');
+        div.className = 'hex-item' + (o.target ? ' target-offset' : '');
+        div.innerHTML = o.off;
+        div.onclick = () => {
+            desc.innerHTML = `OFFSET: ${o.off} | DESC: ${o.desc}`;
+            desc.style.color = o.target ? '#00ff88' : '#64748b';
+        };
+        container.appendChild(div);
+    });
 </script>
 
 </body>
