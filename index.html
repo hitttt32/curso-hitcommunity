@@ -2,167 +2,168 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIT NEXUS | ULTIMATE ARCHITECT V12</title>
+    <title>HIT NEXUS | THE SOVEREIGN V13</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #00ff88; --bg: #010103; --surface: #0a0a0c; --card: #111114;
             --border: #1f1f23; --text: #f8fafc; --dim: #64748b; --danger: #ff4655;
-            --purple: #bf40bf; --cyan: #00d4ff;
+            --eac: #3498db; --be: #f1c40f; --asm: #bf40bf;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; scrollbar-width: thin; }
-        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; }
 
-        /* Navigation Sidebar */
-        .sidebar {
-            width: 320px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border);
-            position: fixed; padding: 40px 20px; overflow-y: auto; z-index: 1000;
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 40px; }
-        .nav-cat { font-size: 0.65rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 25px 0 10px; display: block; }
-        .nav-item { 
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; 
-            color: #8892b0; text-decoration: none; font-size: 0.85rem; transition: 0.3s; cursor: pointer; margin-bottom: 4px;
-        }
+        /* Sidebar Pro */
+        .sidebar { width: 320px; height: 100vh; background: var(--surface); border-right: 1px solid var(--border); position: fixed; padding: 30px 20px; overflow-y: auto; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 30px; }
+        .nav-cat { font-size: 0.6rem; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px; display: block; }
+        .nav-item { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 8px; color: #8892b0; text-decoration: none; font-size: 0.8rem; cursor: pointer; transition: 0.2s; }
         .nav-item:hover { background: rgba(255,255,255,0.03); color: var(--primary); }
         .nav-item.active { background: rgba(0, 255, 136, 0.1); color: var(--primary); font-weight: 700; border: 1px solid rgba(0, 255, 136, 0.2); }
 
-        /* Main Content */
-        .main { margin-left: 320px; width: 100%; padding: 60px 80px; }
-        .section { display: none; animation: slideUp 0.4s ease-out; }
+        /* Content */
+        .main { margin-left: 320px; width: 100%; padding: 50px 60px; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* UI Blocks */
-        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 35px; margin-bottom: 30px; position: relative; }
-        .tag { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 15px; background: rgba(255,255,255,0.05); }
+        .glass-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 25px; }
+        pre { background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--border); font-family: 'JetBrains Mono'; font-size: 0.8rem; color: #a5d6ff; overflow-x: auto; margin: 15px 0; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; background: #000; margin: 20px 0; border: 1px solid var(--border); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
-        pre { background: #000; padding: 25px; border-radius: 15px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: #a5d6ff; overflow-x: auto; margin: 20px 0; }
-        .warning-box { border-left: 4px solid var(--danger); background: rgba(255, 70, 85, 0.05); padding: 25px; border-radius: 12px; margin: 20px 0; }
-        
-        /* Interactive Memory Lab */
-        .hex-dump { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; background: #000; padding: 20px; border-radius: 12px; border: 1px solid var(--primary); }
-        .hex-byte { padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; color: var(--dim); border: 1px solid #111; font-family: 'JetBrains Mono'; }
-        .hex-byte:hover { background: var(--primary); color: #000; }
-        .hex-byte.active { border-color: var(--primary); color: var(--primary); }
-
-        .image-box { border: 2px dashed #222; border-radius: 15px; height: 300px; display: flex; align-items: center; justify-content: center; margin: 25px 0; color: #444; font-size: 0.9rem; background: #08080a; text-align: center; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.85rem; }
+        th { text-align: left; padding: 12px; color: var(--dim); border-bottom: 2px solid var(--border); }
+        td { padding: 12px; border-bottom: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
 <aside class="sidebar">
-    <div class="logo">HIT_NEXUS_V12</div>
+    <div class="logo">HIT_NEXUS_V13</div>
     
-    <span class="nav-cat">Core Intelligence</span>
-    <div class="nav-item active" onclick="nav(this, 'ac-deep')">🛡️ Anti-Cheat Internals</div>
-    <div class="nav-item" onclick="nav(this, 'memory-lab')">🔍 Reversing Lab</div>
-    
-    <span class="nav-cat">Kernel Strategy</span>
-    <div class="nav-item" onclick="nav(this, 'driver-dev')">💻 Kernel Driver (C++)</div>
-    <div class="nav-item" onclick="nav(this, 'spoofer-tech')">🎭 HWID Spoofer</div>
-    <div class="nav-item" onclick="nav(this, 'syscall-asm')">⚡ Direct Syscalls</div>
+    <span class="nav-cat">Video Tutorials</span>
+    <div class="nav-item active" onclick="nav(this, 'tutorials')">🎬 Masterclass Library</div>
+
+    <span class="nav-cat">Anti-Cheat Deep Dive</span>
+    <div class="nav-item" onclick="nav(this, 'eac-be')">🔵 EAC & BattlEye Docs</div>
+    <div class="nav-item" onclick="nav(this, 'spoofer')">🎭 Hardware Spoofing</div>
+
+    <span class="nav-cat">Engines & ASM</span>
+    <div class="nav-item" onclick="nav(this, 'engines')">🎮 Unreal & Unity SDK</div>
+    <div class="nav-item" onclick="nav(this, 'syscalls')">⚡ Direct Syscalls (ASM)</div>
 
     <span class="nav-cat">Exfiltration</span>
-    <div class="nav-item" onclick="nav(this, 'dual-pc')">📡 Dual-PC & DMA</div>
-    <div class="nav-item" onclick="nav(this, 'ghost-gui')">🖼️ Ghost Overlays</div>
-    
-    <span class="nav-cat">Bypassing & Security</span>
-    <div class="nav-item" onclick="nav(this, 'manual-map')">📂 Manual Mapping</div>
-    <div class="nav-item" onclick="nav(this, 'anti-debug')">🚫 Anti-Debugging</div>
+    <div class="nav-item" onclick="nav(this, 'overlay')">🖼️ Stealth Overlays</div>
+    <div class="nav-item" onclick="nav(this, 'vault')">📖 UC Master Archive</div>
 </aside>
 
 <main class="main">
 
-    <section id="ac-deep" class="section active">
-        <h1>Anti-Cheat <span>Internal Logic</span></h1>
-        <p style="color:var(--dim)">O ecossistema completo de proteção do Windows e como os ACs de Ring 0 operam.</p>
-
-        
-
-        <div class="glass-card" style="margin-top:30px;">
-            <h3>Vanguard vs EAC vs BattlEye</h3>
-            <p>Cada AC possui um vetor de ataque diferente. O Vanguard foca em **boot integrity**, enquanto o EAC foca em **memory stripping**.</p>
-            <pre>
-// Vanguard (vgk.sys) check list:
-1. UEFI Secure Boot Status
-2. TPM 2.0 Persistence
-3. Driver Signature Enforcement (DSE)
-4. IOMMU status (DMA protection)
-            </pre>
-        </div>
-    </section>
-
-    <section id="memory-lab" class="section">
-        <h1>Memory <span>Reversing Lab</span></h1>
+    <section id="tutorials" class="section active">
+        <h1>Masterclass <span>Video Library</span></h1>
         <div class="glass-card">
-            <h3>Identificação de Classes (C_BaseEntity)</h3>
-            <p style="margin-bottom:20px;">Clique nos offsets de memória abaixo para analisar a estrutura do objeto em tempo real.</p>
-            <div class="hex-dump" id="hex-container"></div>
-            <div id="hex-desc" style="margin-top:20px; padding:15px; background:rgba(0,255,136,0.05); color:var(--primary); border-radius:8px; font-family:'JetBrains Mono'; font-size:0.85rem;">
-                SELECIONE UM OFFSET...
+            <h3>1. Engenharia Reversa com IDA Pro</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Wn3_O8-Gv6U"></iframe>
+            </div>
+            <h3>2. Escrevendo seu primeiro Kernel Driver</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/onfZ9xPWSvo"></iframe>
             </div>
         </div>
+    </section>
 
+    <section id="eac-be" class="section">
+        <h1>EAC & BattlEye <span>Internals</span></h1>
+        <div class="glass-card">
+            <h3 style="color:var(--eac)">Easy Anti-Cheat (EAC)</h3>
+            <p>O EAC utiliza <b>"Heartbeats"</b>. Se o servidor não receber um sinal criptografado do driver a cada X segundos, você é desconectado.</p>
+            <table>
+                <tr><th>Vetor</th><th>Descrição</th></tr>
+                <tr><td>Cr3 Protection</td><td>Esconde diretórios de páginas para impedir leitura externa.</td></tr>
+                <tr><td>Stack Walking</td><td>Analisa quem chamou a função de leitura de memória.</td></tr>
+            </table>
+
+            <h3 style="color:var(--be); margin-top:20px;">BattlEye (BE)</h3>
+            <p>Famoso pelos <b>"Shellcode Tests"</b>. O BE envia pequenos códigos aleatórios para o seu PC e checa a resposta.</p>
+            
+        </div>
+    </section>
+
+    <section id="spoofer" class="section">
+        <h1>Hardware <span>Identity Spoofing</span></h1>
+        <div class="glass-card">
+            <p>Para remover um banimento de HWID, você deve atacar três frentes:</p>
+            <pre>
+// 1. Disk Serial (SMART Data)
+// 2. NIC MAC Address (Network)
+// 3. SMBIOS Tables (UUID/Serial da Placa Mãe)
+
+// Exemplo: Limpando rastros de Registro do Windows
+void CleanTraces() {
+    RegDeleteKey(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Enum\\IDE");
+    RegDeleteKey(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0");
+}
+            </pre>
+            
+        </div>
+    </section>
+
+    <section id="engines" class="section">
+        <h1>Unreal & Unity <span>SDK Generation</span></h1>
+        <div class="glass-card">
+            <h3>Unreal Engine 4/5</h3>
+            <pre>
+struct UWorld {
+    uintptr_t PersistentLevel; // GWorld + 0x30
+    uintptr_t OwningGameInstance; // GWorld + 0x180
+};
+// Caminho do Bone (Osso):
+// Mesh + StaticMesh + BoneArray + (BoneIndex * BoneSize)
+            </pre>
+            <h3>Unity (IL2CPP)</h3>
+            <p>No Unity moderno, os nomes das funções são ofuscados. Use o <b>Il2CppDumper</b> para restaurar a estrutura.</p>
+        </div>
         
     </section>
 
-    <section id="driver-dev" class="section">
-        <h1>Kernel <span>Mode Operations</span></h1>
-        <div class="warning-box">
-            <b>PERIGO:</b> Erros no Ring 0 resultam em Blue Screen of Death (BSOD). Teste sempre em uma VM isolada.
-        </div>
+    <section id="syscalls" class="section">
+        <h1>Direct Syscalls <span>(x64 Assembly)</span></h1>
         <div class="glass-card">
-            <h3>Memory R/W sem Callbacks</h3>
-            <pre>
-// Lendo memória ignorando proteções de User-Mode
-NTSTATUS SafeReadMemory(uintptr_t src, PVOID dest, size_t size) {
-    SIZE_T bytes;
-    MM_COPY_ADDRESS addr;
-    addr.PhysicalAddress.QuadPart = (LONGLONG)src; 
-    return MmCopyMemory(dest, addr, size, MM_COPY_MEMORY_PHYSICAL, &bytes);
-}
-            </pre>
-        </div>
-    </section>
-
-    <section id="ghost-gui" class="section">
-        <h1>Ghost <span>Overlay (GDI+)</span></h1>
-        <div class="glass-card">
-            <h3>Renderização Stealth</h3>
-            <p>Usar DirectX é perigoso devido ao hooking da VTable. GDI+ permite desenhar diretamente na camada de janelas do Windows.</p>
-            <pre>
-// Criando janela de overlay "transparente aos cliques"
-SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOPMOST);
-SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 255, LWA_COLORKEY);
-
-// Loop de Desenho
-Graphics graphics(hdc);
-Pen greenPen(Color(255, 0, 255, 0), 2);
-graphics.DrawRectangle(&greenPen, targetX, targetY, 50, 100);
-            </pre>
-        </div>
-
-        [Image showing a comparison between DirectX hooked overlays and GDI+ external window overlays in terms of visibility to screen capture]
-    </section>
-
-    <section id="dual-pc" class="section">
-        <h1>Direct <span>Memory Access (DMA)</span></h1>
-        <div class="glass-card">
-            <p>A solução definitiva para indetectabilidade. O código do cheat reside fisicamente fora do PC do jogo.</p>
-            
-            
-
-            <div class="code-wrap">
-                <pre>
-// Exemplo de leitura via DMA (PC Secundário)
-if (!vmm.MemRead(dwProcessId, entity_address + 0x10, (PBYTE)&health, 4)) {
-    printf("Falha ao ler via hardware FPGA\n");
-}
-                </pre>
+            <p>Ignora hooks na `ntdll.dll` executando a instrução `syscall` diretamente no hardware.</p>
+            <div style="color:var(--asm); font-family:'JetBrains Mono'; background:#000; padding:15px; border-radius:10px;">
+                mov r10, rcx<br>
+                mov eax, 3Fh ; NtReadVirtualMemory ID<br>
+                syscall<br>
+                ret
             </div>
+        </div>
+    </section>
+
+    <section id="overlay" class="section">
+        <h1>Stealth <span>Overlay Tactics</span></h1>
+        <div class="glass-card">
+            <p>Como evitar ser detectado por <b>BitBlt</b> (captura de tela do Anti-Cheat):</p>
+            <ul>
+                <li>Use janelas com <b>WS_EX_LAYERED</b>.</li>
+                <li>Desenhe usando <b>Discord Overlay Hook</b> (o AC confia no Discord).</li>
+                <li>Use **Overlay via Hardware** (Overlay de monitores ou placas de vídeo).</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="vault" class="section">
+        <h1>UnKnoWnCheaTs <span>Legendary Archive</span></h1>
+        <div class="glass-card">
+            <p>As threads que mudaram a história:</p>
+            <table class="tech-table">
+                <tr><td><a href="#" style="color:var(--primary)">[Release] ReClass.NET</a></td><td>A ferramenta essencial para mapping de classes.</td></tr>
+                <tr><td><a href="#" style="color:var(--primary)">[Tutorial] Kernel MMU Manipulation</a></td><td>Como ler memória sem ser detectado.</td></tr>
+                <tr><td><a href="#" style="color:var(--primary)">[Source] KDU (Kernel Driver Utility)</a></td><td>Mapper universal para drivers não assinados.</td></tr>
+            </table>
         </div>
     </section>
 
@@ -176,30 +177,6 @@ if (!vmm.MemRead(dwProcessId, entity_address + 0x10, (PBYTE)&health, 4)) {
         document.getElementById(id).classList.add('active');
         window.scrollTo(0,0);
     }
-
-    const offsets = [
-        {off: '0x00', desc: 'VTable Pointer (Pointer para funções da classe)'},
-        {off: '0x08', desc: 'm_iHealth (Int32: Vida do Jogador)'},
-        {off: '0x0C', desc: 'm_iTeamNum (Int32: ID da Equipe)'},
-        {off: '0x10', desc: 'm_vecOrigin (Vector3: Posição X,Y,Z)'},
-        {off: '0x28', desc: 'm_angEyeAngles (Vector3: Ângulo da Câmera)'},
-        {off: '0x40', desc: 'm_bIsDormant (Bool: Jogador Ativo?)'}
-    ];
-
-    const container = document.getElementById('hex-container');
-    const desc = document.getElementById('hex-desc');
-
-    offsets.forEach(o => {
-        const div = document.createElement('div');
-        div.className = 'hex-byte';
-        div.innerHTML = o.off;
-        div.onclick = () => {
-            document.querySelectorAll('.hex-byte').forEach(b => b.classList.remove('active'));
-            div.classList.add('active');
-            desc.innerHTML = `OFFSET: ${o.off} | FUNÇÃO: ${o.desc}`;
-        };
-        container.appendChild(div);
-    });
 </script>
 
 </body>
